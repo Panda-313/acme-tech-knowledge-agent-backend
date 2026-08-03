@@ -2,6 +2,7 @@
 
 from .rag import (
     ask_question,
+    ask_question_agent,
     create_rag_chain,
     ingest_documents,
     load_documents,
@@ -14,6 +15,7 @@ __all__ = [
     "load_documents",
     "split_documents",
     "ask_question",
+    "ask_question_agent",
     "create_rag_chain",
     "load_vectorstore",
 ]

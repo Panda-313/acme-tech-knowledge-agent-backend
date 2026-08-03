@@ -1,0 +1,4 @@
+[console_scripts]
+api = src.api.cli:main
+ingest = src.feature_engineering.scripts.ingest:main
+rag-demo = src.feature_engineering.scripts.rag_demo:main

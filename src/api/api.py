@@ -4,15 +4,17 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 import logging
 from fastapi.middleware.cors import CORSMiddleware
+from langgraph.checkpoint.memory import InMemorySaver
 
 from src.api.types import Question, Answer
-from src.feature_engineering import ask_question, load_vectorstore
+from src.feature_engineering import ask_question_agent, load_vectorstore
 from src.feature_engineering.config import (
     CHROMA_COLLECTION_NAME,
     CHROMA_DB_PATH,
     LOG_FORMAT,
     LOG_LEVEL,
 )
+from src.feature_engineering.scripts.rag_demo import MOCKED_USERS
 
 logger = logging.getLogger(__name__)
 
@@ -38,7 +40,8 @@ async def lifespan(app: FastAPI):
             persist_directory=str(CHROMA_DB_PATH),
             collection_name=CHROMA_COLLECTION_NAME,
         )
-        logger.info("Vector store loaded successfully")
+        app.state.checkpointer = InMemorySaver()
+        logger.info("Vector store and checkpointer loaded successfully")
     except Exception as e:
         logger.error(f"Failed to load vectorstore during startup: {e}")
         raise RuntimeError("Failed to initialize vectorstore") from e
@@ -47,6 +50,8 @@ async def lifespan(app: FastAPI):
     finally:
         if hasattr(app.state, "vectorstore"):
             del app.state.vectorstore
+        if hasattr(app.state, "checkpointer"):
+            del app.state.checkpointer
 
 
 app = FastAPI(lifespan=lifespan)
@@ -68,11 +73,20 @@ def read_root() -> dict[str, str]:
     return {"Hello": "World"}
 
 
-@app.post("/ask")
-def ask_question_post(question: Question) -> Answer:
+@app.post("/chat")
+def ask_question_post(question: Question, thread_id: int) -> Answer:
     logger.info("POST request: /ask with body: %s", question.question)
     vectorstore = getattr(app.state, "vectorstore", None)
     if vectorstore is None:
         raise HTTPException(status_code=500, detail="Vectorstore not initialized")
+    checkpointer = getattr(app.state, "checkpointer", None)
+    if checkpointer is None:
+        raise HTTPException(status_code=500, detail="Checkpointer not initialized")
 
-    return ask_question(question.question, vectorstore)
+    return ask_question_agent(
+        question.question,
+        vectorstore,
+        current_user=MOCKED_USERS[0],
+        checkpointer=checkpointer,
+        thread_id=thread_id
+    )

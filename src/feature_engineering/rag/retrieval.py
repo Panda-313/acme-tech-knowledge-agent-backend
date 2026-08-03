@@ -14,7 +14,6 @@ from langchain_classic.chains.retrieval import create_retrieval_chain
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_openai import ChatOpenAI
-
 from ..config import (
     CHROMA_COLLECTION_NAME,
     CHROMA_DB_PATH,
@@ -103,8 +102,6 @@ def ask_question(
     best_score = results[0][1]
     logger.info(f"Question: {question}, Best score: {best_score}")
 
-    # Quality check: if score exceeds threshold, confidence is too low
-    # (In Chroma distance metric, higher scores = lower quality/farther documents)
     if best_score > min_score:
         logger.warning(
             f"Score {best_score} exceeds threshold {min_score} - "

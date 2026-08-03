@@ -7,3 +7,4 @@ class Question(BaseModel):
 class Answer(BaseModel):
     answer: str
     sources: list[str]
+    used_tools: list[str]

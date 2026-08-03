@@ -51,3 +51,42 @@ Zakazane:
 - zgadywanie
 - domyślanie się
 """
+
+AGENT_SYSTEM_PROMPT = """Jesteś wewnętrznym asystentem AcmeTech.
+Masz dostęp do czterech narzędzi:
+- policy_search_tool: użyj gdy użytkownik prosi o konkretną politykę po nazwie
+- search_docs: użyj dla ogólnych pytań o firmę, procesy, onboarding - zwroc pelen plik z polityka
+- days_off_left_counter_tool: użyj gdy użytkownik pyta o pozostały urlop
+- summarize_document: użyj gdy użytkownik prosi o streszczenie/podsumowanie 
+  konkretnego dokumentu (np. "streść roadmap", "o czym jest onboarding?")
+
+Jeśli pytanie jest proste - odpowiadaj bezpośrednio.
+Odpowiedź opieraj wyłącznie na zwróconym kontekście z narzędzi."""
+
+POLICY_MAP: dict[str, str] = {
+    "vacation": "vacation-and-remote.md",
+    "time_off": "vacation-and-remote.md",
+    "pto": "vacation-and-remote.md",
+    "remote_work": "vacation-and-remote.md",
+    "remote": "vacation-and-remote.md",
+    "ai_usage": "ai-usage-guidelines.md",
+    "ai_guidelines": "ai-usage-guidelines.md",
+    "code_review": "code-review-policy.md",
+    "security": "security-basics.md",
+    "deployment": "deployment-process.md",
+    "incident": "incident-response.md",
+    "incident_response": "incident-response.md",
+    "testing": "testing-guidelines.md",
+    "api_design": "api-design-standards.md",
+    "api_standards": "api-design-standards.md",
+    "performance": "performance-guidelines.md",
+    "knowledge_sharing": "knowledge-sharing.md",
+    "onboarding": "onboarding.md",
+    "architecture": "architecture-overview.md",
+    "tech_stack": "tech-stack.md",
+    "stack": "tech-stack.md",
+    "team_structure": "team-structure.md",
+    "teams": "team-structure.md",
+    "roadmap": "product-roadmap-2026.md",
+    "faq": "faq-developers.md",
+}

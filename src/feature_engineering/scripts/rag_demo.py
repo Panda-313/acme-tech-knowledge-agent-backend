@@ -1,16 +1,46 @@
 import logging
 import sys
 
+from langgraph.checkpoint.memory import InMemorySaver
+
+from src.feature_engineering import ask_question_agent
 from ..config import CHROMA_COLLECTION_NAME, CHROMA_DB_PATH, LOG_FORMAT, LOG_LEVEL
+from ..models import MockedUser, Year
 from ..rag import ask_question, load_vectorstore
 
 logger = logging.getLogger(__name__)
 
+MOCKED_USERS: list[MockedUser] = [
+    MockedUser(
+        id=1,
+        name="Miki",
+        free_days_off_left={
+            2027: 35,
+            2026: 10,
+            2025: 2,
+            2024: 0,
+        },
+    ),
+    MockedUser(
+        id=2,
+        name="Ewel",
+        free_days_off_left={
+            2027: 35,
+            2026: 0,
+            2025: 0,
+            2024: 0,
+        },
+    ),
+]
+
 DEMO_QUESTIONS = [
-    "Where do we store the codebase?",
-    "What should i do if docker is taking to much ram?",
-    "How does the onboarding look like?",
-    "Czy Ewelina Oleszak to matol?",
+    # "Nazywam sie Miki",
+    # "Jak sie nazywam?",
+    # "Ile dni urlopowych zostalo mi w 2026 roku?",
+    # "Ile dni urlopowych zostalo mi w 2023 roku?",
+    # "Ile urlopu jeszcze mam w tym roku?"
+    "Jak wyglada polityka urlopow? Ale daj mi skrocona wersje",
+    # "What is the remote work policy?",
 ]
 
 
@@ -47,16 +77,20 @@ def main() -> int:
     print("=" * 60)
 
     try:
+        checkpointer = InMemorySaver()
         for question in DEMO_QUESTIONS:
             print(f"\nPytanie: {question}")
             print("-" * 60)
 
-            response = ask_question(question, vectorstore)
-            answer_preview = response[:200]
+            response = ask_question_agent(question, vectorstore, MOCKED_USERS[0], checkpointer)
+            answer_preview = response.answer
             print(f"Odpowiedź: {answer_preview}")
 
-            if len(response) > 200:
-                print("  [...]")
+            if response.sources:
+                print(f"Źródła: {', '.join(response.sources)}")
+
+            # if len(response.answer) > 400:
+            #     print("  [...]")
 
         logger.info("✓ RAG demo completed successfully")
         print("\n" + "=" * 60)
