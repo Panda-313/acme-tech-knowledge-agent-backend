@@ -1,13 +1,13 @@
-# API Design Standards
+# Standardy projektowania API
 
-## General Principles
+## Zasady ogólne
 
-- RESTful where it fits, pragmatic where it doesn’t
-- Consistent naming and response shapes
-- Explicit versioning
-- Good error messages that help the client
+- RESTful tam, gdzie pasuje; pragmatycznie tam, gdzie nie pasuje
+- Spójne nazewnictwo i kształt odpowiedzi
+- Jawne wersjonowanie
+- Czytelne komunikaty błędów pomocne dla klienta
 
-## URL Structure
+## Struktura URL
 
 ```
 https://api.acmetech.example/v1/resources
@@ -15,28 +15,28 @@ https://api.acmetech.example/v1/resources/{id}
 https://api.acmetech.example/v1/resources/{id}/sub-resources
 ```
 
-- Use kebab-case for multi-word path segments
-- Prefer plural nouns for collections
-- Version in the path (`/v1/`, `/v2/`)
+- Używaj kebab-case dla wielowyrazowych segmentów ścieżki
+- Dla kolekcji preferuj rzeczowniki w liczbie mnogiej
+- Wersję podawaj w ścieżce (`/v1/`, `/v2/`)
 
-## HTTP Methods
+## Metody HTTP
 
-| Method | Usage                              |
+| Metoda | Zastosowanie                       |
 |--------|------------------------------------|
-| GET    | Read (safe, idempotent)            |
-| POST   | Create or non-idempotent actions   |
-| PUT    | Full replacement                   |
-| PATCH  | Partial update                     |
-| DELETE | Remove                             |
+| GET    | Odczyt (safe, idempotent)          |
+| POST   | Tworzenie lub akcje nieidempotentne |
+| PUT    | Pełne nadpisanie                   |
+| PATCH  | Częściowa aktualizacja             |
+| DELETE | Usunięcie                          |
 
-## Request & Response
+## Request i response
 
-- JSON only (unless streaming or file download)
-- Request bodies validated with Pydantic models
-- Success responses: appropriate 2xx status + JSON body
-- Collections should support pagination (`limit`, `cursor` or `offset`)
+- Tylko JSON (chyba że streaming lub pobieranie pliku)
+- Ciała requestów walidowane modelami Pydantic
+- Odpowiedzi sukcesu: odpowiedni status 2xx + body JSON
+- Kolekcje powinny wspierać paginację (`limit`, `cursor` albo `offset`)
 
-### Standard Success Envelope (optional but recommended for new endpoints)
+### Standardowa koperta sukcesu (opcjonalna, ale rekomendowana dla nowych endpointów)
 
 ```json
 {
@@ -47,13 +47,13 @@ https://api.acmetech.example/v1/resources/{id}/sub-resources
 }
 ```
 
-### Error Response
+### Odpowiedź błędu
 
 ```json
 {
   "error": {
     "code": "validation_error",
-    "message": "Human readable message",
+    "message": "Czytelny komunikat",
     "details": [ ... ]
   },
   "meta": {
@@ -62,16 +62,16 @@ https://api.acmetech.example/v1/resources/{id}/sub-resources
 }
 ```
 
-Use consistent error codes across services.
+Używaj spójnych kodów błędów między usługami.
 
-## Authentication
+## Uwierzytelnianie
 
-- Bearer token (JWT or opaque) in the `Authorization` header
-- Service-to-service: mTLS or signed internal tokens (details in security docs)
+- Bearer token (JWT lub opaque) w nagłówku `Authorization`
+- Service-to-service: mTLS albo podpisane tokeny wewnętrzne (szczegóły w dokumentacji security)
 
-## Pagination
+## Paginacja
 
-Prefer cursor-based pagination for large or frequently changing collections:
+Dla dużych lub często zmieniających się kolekcji preferuj paginację opartą o cursor:
 
 ```
 GET /v1/items?limit=20&cursor=eyJ...
@@ -79,16 +79,16 @@ GET /v1/items?limit=20&cursor=eyJ...
 
 ## Streaming
 
-For LLM responses we use Server-Sent Events (SSE) or chunked transfer encoding.  
-Document the exact format in the endpoint docstring.
+Dla odpowiedzi LLM używamy Server-Sent Events (SSE) lub chunked transfer encoding.  
+Dokumentuj dokładny format w docstringu endpointu.
 
-## Documentation
+## Dokumentacja
 
-- Every public endpoint must have an OpenAPI entry (FastAPI handles most of this)
-- Keep descriptions up to date
-- Breaking changes require a new major version and a migration guide
+- Każdy publiczny endpoint musi mieć wpis OpenAPI (FastAPI obsługuje większość automatycznie)
+- Utrzymuj opisy endpointów aktualne
+- Zmiany breaking wymagają nowej wersji major i przewodnika migracji
 
-## Deprecation
+## Deprecacja
 
-- Announce deprecations at least 90 days in advance for external APIs
-- Internal APIs can move faster but still need communication in `#engineering`
+- Deprecacje zewnętrznych API ogłaszaj co najmniej 90 dni wcześniej
+- Wewnętrzne API mogą zmieniać się szybciej, ale nadal wymagają komunikacji na `#engineering`

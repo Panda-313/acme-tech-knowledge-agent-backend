@@ -1,60 +1,60 @@
-# AcmeTech Product Roadmap 2026
+# Roadmap produktowy AcmeTech 2026
 
-Status: Living document – last major update July 2026
+Status: dokument żywy — ostatnia duża aktualizacja: lipiec 2026
 
-## Vision
+## Wizja
 
-Become the go-to platform for companies that want to ship Angular applications enhanced with reliable, grounded AI features.
+Stać się platformą pierwszego wyboru dla firm, które chcą dostarczać aplikacje Angular wzbogacone o niezawodne i ugruntowane funkcje AI.
 
-## Q3 2026 (July – September)
+## Q3 2026 (lipiec – wrzesień)
 
-### Platform
-- [ ] Knowledge Bot v1 (internal RAG chatbot) – **in progress**
-- [ ] Unified authentication across all internal tools (OIDC)
-- [ ] Improved developer portal with API playground
+### Platforma
+- [ ] Knowledge Bot v1 (wewnętrzny chatbot RAG) – **w toku**
+- [ ] Ujednolicone uwierzytelnianie we wszystkich narzędziach wewnętrznych (OIDC)
+- [ ] Ulepszony portal deweloperski z API playground
 
-### AI Capabilities
-- [ ] Production-ready RAG evaluation framework
-- [ ] Support for hybrid search (vector + keyword)
-- [ ] Basic agentic workflows for internal support tickets
+### Możliwości AI
+- [ ] Produkcyjny framework ewaluacji RAG
+- [ ] Wsparcie dla wyszukiwania hybrydowego (wektor + słowo kluczowe)
+- [ ] Podstawowe workflow agentowe dla wewnętrznych ticketów wsparcia
 
 ### Frontend
-- [ ] Design system v2 (Angular Material + custom tokens)
-- [ ] Dark mode across all products
-- [ ] Performance budget enforcement in CI
+- [ ] Design system v2 (Angular Material + własne tokeny)
+- [ ] Tryb ciemny we wszystkich produktach
+- [ ] Egzekwowanie budżetów wydajnościowych w CI
 
-## Q4 2026 (October – December)
+## Q4 2026 (październik – grudzień)
 
-### Platform
-- [ ] Multi-tenant support for external customers
-- [ ] Usage-based billing prototype
-- [ ] Audit logging for all AI interactions
+### Platforma
+- [ ] Wsparcie multi-tenant dla klientów zewnętrznych
+- [ ] Prototyp rozliczeń usage-based
+- [ ] Audit logi dla wszystkich interakcji AI
 
-### AI Capabilities
-- [ ] Document upload + automatic indexing pipeline
-- [ ] Citation quality improvements + source highlighting
-- [ ] Local model fallback (Ollama) for offline / sensitive environments
+### Możliwości AI
+- [ ] Upload dokumentów + automatyczny pipeline indeksacji
+- [ ] Poprawa jakości cytowań + podświetlanie źródeł
+- [ ] Lokalny fallback modelu (Ollama) dla środowisk offline / wrażliwych
 
 ### Developer Experience
-- [ ] One-click local environment with pre-seeded data
-- [ ] Better error messages and self-healing suggestions in the CLI
+- [ ] Lokalny setup „one-click” z pre-seedowanymi danymi
+- [ ] Lepsze komunikaty błędów i sugestie samonaprawy w CLI
 
-## 2027 Early Themes (Not Yet Committed)
+## Wczesne tematy na 2027 (jeszcze niezatwierdzone)
 
-- Voice interface for the Knowledge Bot
-- Multi-agent orchestration for complex internal workflows
-- Public marketplace for reusable AI components built on our platform
+- Interfejs głosowy dla Knowledge Bota
+- Orkiestracja multi-agentowa dla złożonych wewnętrznych procesów
+- Publiczny marketplace reużywalnych komponentów AI zbudowanych na naszej platformie
 
-## Prioritization Principles
+## Zasady priorytetyzacji
 
-1. **Reliability first** – we do not ship AI features that hallucinate critical information
-2. **Developer experience** – if it is painful for our own engineers, it will be painful for customers
-3. **Measurable impact** – every major initiative has success metrics defined upfront
+1. **Najpierw niezawodność** – nie wdrażamy funkcji AI, które halucynują krytyczne informacje
+2. **Developer experience** – jeśli nasze własne zespoły cierpią, klienci też będą cierpieć
+3. **Mierzalny wpływ** – każda duża inicjatywa ma zdefiniowane metryki sukcesu
 
-## How to Influence the Roadmap
+## Jak wpływać na roadmapę
 
-- Open a Linear ticket with the `roadmap-idea` label
-- Discuss in the monthly Product & Engineering sync
-- Talk directly to your tech lead or product counterpart
+- Otwórz ticket w Linear z etykietą `roadmap-idea`
+- Omów temat na comiesięcznym syncu Product & Engineering
+- Porozmawiaj bezpośrednio z tech leadem lub odpowiednikiem po stronie produktu
 
-This document is owned by Product + Engineering leadership and updated at least once per quarter.
+Właścicielem tego dokumentu jest leadership Product + Engineering. Aktualizacja następuje co najmniej raz na kwartał.

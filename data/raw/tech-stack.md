@@ -1,67 +1,67 @@
-# AcmeTech Technology Stack
+# Stos technologiczny AcmeTech
 
-Last updated: July 2026
+Ostatnia aktualizacja: lipiec 2026
 
-## Overview
+## Przegląd
 
-AcmeTech builds internal and customer-facing tools using a modern Angular + Python stack with a strong focus on AI-assisted development and RAG-based knowledge systems.
+AcmeTech buduje narzędzia wewnętrzne i klienckie w nowoczesnym stacku Angular + Python, z mocnym naciskiem na development wspierany AI oraz systemy wiedzy oparte o RAG.
 
 ## Frontend
 
-| Layer              | Technology                          | Notes |
+| Warstwa            | Technologia                         | Uwagi |
 |--------------------|-------------------------------------|-------|
 | Framework          | Angular 19                          | Standalone components, Signals |
-| UI Library         | Angular Material + Tailwind CSS     | Custom design system on top |
-| State Management   | NgRx Signal Store / Signals         | Prefer Signals for new code |
-| HTTP               | HttpClient + interceptors           | Auth + error handling |
-| Testing            | Jest + Angular Testing Library      | Unit + component tests |
-| E2E                | Playwright                          | Critical user flows |
+| Biblioteka UI      | Angular Material + Tailwind CSS     | Nad tym działa własny design system |
+| Zarządzanie stanem | NgRx Signal Store / Signals         | Dla nowego kodu preferujemy Signals |
+| HTTP               | HttpClient + interceptory           | Auth + obsługa błędów |
+| Testy              | Jest + Angular Testing Library      | Testy unit i komponentowe |
+| E2E                | Playwright                          | Krytyczne ścieżki użytkownika |
 | Build              | Angular CLI + esbuild               | |
 
-### Frontend Conventions
-- Strict TypeScript (`strict: true`)
-- Prefer standalone components
-- Use `input()` / `output()` functions (not decorators)
-- All new features must have at least basic unit tests
+### Konwencje frontendowe
+- Ścisły TypeScript (`strict: true`)
+- Preferuj standalone components
+- Używaj funkcji `input()` / `output()` (zamiast dekoratorów)
+- Każda nowa funkcja musi mieć co najmniej podstawowe testy unit
 
 ## Backend
 
-| Layer              | Technology                          | Notes |
+| Warstwa            | Technologia                         | Uwagi |
 |--------------------|-------------------------------------|-------|
-| Language           | Python 3.12                         | |
-| Framework          | FastAPI                             | Async preferred |
+| Język              | Python 3.12                         | |
+| Framework          | FastAPI                             | Preferowane podejście async |
 | ORM                | SQLAlchemy 2.0 + Alembic            | |
-| Database           | PostgreSQL 16                       | Primary data store |
-| Cache / Queue      | Redis                               | Sessions, Celery |
-| Validation         | Pydantic v2                         | |
-| Testing            | pytest + httpx                      | |
+| Baza danych        | PostgreSQL 16                       | Główny magazyn danych |
+| Cache / kolejka    | Redis                               | Sesje, Celery |
+| Walidacja          | Pydantic v2                         | |
+| Testy              | pytest + httpx                      | |
 
-## AI / LLM Layer
+## Warstwa AI / LLM
 
-| Component          | Technology                          | Notes |
+| Komponent          | Technologia                         | Uwagi |
 |--------------------|-------------------------------------|-------|
-| Orchestration      | LangChain / LlamaIndex              | Currently evaluating both |
-| Vector Store       | ChromaDB (local) → Qdrant (prod)    | |
-| Embeddings         | `sentence-transformers/all-MiniLM-L6-v2` or OpenAI `text-embedding-3-small` | Local preferred for cost |
-| LLM Providers      | Groq (primary), Ollama (local), OpenAI (fallback) | |
-| RAG Evaluation     | Custom + Ragas                      | |
+| Orkiestracja       | LangChain / LlamaIndex              | Aktualnie oceniamy oba podejścia |
+| Vector Store       | ChromaDB (lokalnie) → Qdrant (prod) | |
+| Embeddingi         | `sentence-transformers/all-MiniLM-L6-v2` lub OpenAI `text-embedding-3-small` | Lokalnie preferowane kosztowo |
+| Dostawcy LLM       | Groq (główny), Ollama (lokalnie), OpenAI (fallback) | |
+| Ewaluacja RAG      | Custom + Ragas                      | |
 
-## Infrastructure & DevOps
+## Infrastruktura i DevOps
 
-- **Containers**: Docker + Docker Compose (local)
+- **Kontenery**: Docker + Docker Compose (lokalnie)
 - **CI/CD**: GitHub Actions
-- **Hosting**: Currently AWS (ECS + RDS). Migration to Railway / Fly.io under evaluation for smaller services.
-- **Secrets**: 1Password + AWS Secrets Manager
-- **Monitoring**: OpenTelemetry + Grafana (in progress)
+- **Hosting**: Aktualnie AWS (ECS + RDS). Dla mniejszych usług rozważamy migrację do Railway / Fly.io.
+- **Sekrety**: 1Password + AWS Secrets Manager
+- **Monitoring**: OpenTelemetry + Grafana (w toku)
 
-## Local Development Requirements
+## Wymagania do lokalnego developmentu
 
 - Node.js 22+
 - Python 3.12+
 - Docker Desktop / Colima
 - Git
 
-## Version Policy
+## Polityka wersji
 
-- We stay on the latest LTS / stable versions.
-- Major upgrades are planned quarterly and announced in `#engineering`.
+- Trzymamy się najnowszych stabilnych wersji / LTS.
+- Duże aktualizacje planujemy kwartalnie i ogłaszamy na `#engineering`.

@@ -1,61 +1,61 @@
-# Knowledge Sharing at AcmeTech
+# Dzielenie się wiedzą w AcmeTech
 
-## Why It Matters
+## Dlaczego to ważne
 
-We move fast. The only way to stay aligned and avoid repeating the same mistakes is deliberate knowledge sharing.
+Działamy szybko. Jedyny sposób, by pozostać spójnymi i nie powtarzać tych samych błędów, to świadome dzielenie się wiedzą.
 
-## Official Channels
+## Oficjalne kanały
 
-| Channel              | Purpose                                      | Frequency |
-|----------------------|----------------------------------------------|-----------|
-| Linear + GitHub      | Decisions, tickets, code                     | Continuous |
-| Notion / Drive       | Longer-form docs, RFCs, meeting notes        | Continuous |
-| `#engineering`       | Day-to-day questions and announcements       | Continuous |
-| Engineering Sync     | Cross-team updates                           | Weekly (Tue) |
-| AI Guild             | Experiments, papers, internal tools          | Bi-weekly |
-| Frontend Guild       | Angular patterns, design system              | Monthly |
-| RFCs                 | Significant technical decisions              | As needed |
+| Kanał                | Cel                                          | Częstotliwość |
+|----------------------|----------------------------------------------|---------------|
+| Linear + GitHub      | Decyzje, tickety, kod                        | Ciągle |
+| Notion / Drive       | Dłuższe dokumenty, RFC, notatki ze spotkań   | Ciągle |
+| `#engineering`       | Codzienne pytania i ogłoszenia               | Ciągle |
+| Engineering Sync     | Aktualizacje między zespołami                | Co tydzień (wtorek) |
+| AI Guild             | Eksperymenty, artykuły, narzędzia wewnętrzne | Co 2 tygodnie |
+| Frontend Guild       | Wzorce Angular, design system                | Co miesiąc |
+| RFC                  | Istotne decyzje techniczne                   | W razie potrzeby |
 
-## RFCs (Request for Comments)
+## RFC (Request for Comments)
 
-For non-trivial architectural or process changes:
+W przypadku nietrywialnych zmian architektonicznych lub procesowych:
 
-1. Write a short RFC in Notion (template available)
-2. Share the link in `#engineering` and tag relevant people
-3. Leave at least 3–5 working days for comments
-4. Summarize the decision and update the document
-5. Link the RFC from the relevant PR or ticket
+1. Napisz krótki RFC w Notion (szablon jest dostępny)
+2. Udostępnij link na `#engineering` i oznacz odpowiednie osoby
+3. Zostaw minimum 3–5 dni roboczych na komentarze
+4. Podsumuj decyzję i zaktualizuj dokument
+5. Podlinkuj RFC w odpowiednim PR lub tickecie
 
-## Documentation Expectations
+## Oczekiwania dotyczące dokumentacji
 
-- Every service and significant feature should have a README that answers:
-  - What does this do?
-  - How do I run it locally?
-  - What are the main configuration options?
-  - Who owns it?
-- Prefer living documentation close to the code over stale Confluence pages.
-- The Knowledge Bot (this project) is intended to make internal docs actually discoverable.
+- Każdy serwis i istotna funkcja powinny mieć README odpowiadające na pytania:
+  - Co to robi?
+  - Jak uruchomić to lokalnie?
+  - Jakie są główne opcje konfiguracji?
+  - Kto jest właścicielem?
+- Preferujemy „żywą” dokumentację blisko kodu zamiast nieaktualnych stron Confluence.
+- Knowledge Bot (ten projekt) ma sprawiać, że dokumenty wewnętrzne są faktycznie łatwe do odnalezienia.
 
-## Brown Bags & Demos
+## Brown bagi i dema
 
-- Anyone can schedule a 20–30 min demo or knowledge-sharing session
-- Recordings are stored in the shared Drive folder
-- Topics can be technical deep-dives, post-mortems, or “what I learned this month”
+- Każdy może zaplanować 20–30 minutowe demo lub sesję dzielenia się wiedzą
+- Nagrania przechowujemy we współdzielonym folderze na Drive
+- Tematy mogą obejmować deep-dive techniczny, post-mortem lub „czego nauczyłem(-am) się w tym miesiącu”
 
-## Onboarding Buddy System
+## System onboarding buddy
 
-New joiners are paired with a buddy for the first 4–6 weeks.  
-Buddies help with both technical and cultural questions and are expected to proactively check in.
+Nowe osoby dostają buddy’ego na pierwsze 4–6 tygodni.  
+Buddy pomaga zarówno w pytaniach technicznych, jak i kulturowych, i powinien proaktywnie się odzywać.
 
-## Contributing to the Knowledge Base
+## Wkład do bazy wiedzy
 
-If you find outdated information:
+Jeśli znajdziesz nieaktualną informację:
 
-1. Fix it directly if you can (PR or Notion edit)
-2. Or open a ticket / leave a comment so someone else can update it
+1. Popraw ją od razu, jeśli możesz (PR albo edycja w Notion)
+2. Albo otwórz ticket / zostaw komentarz, aby ktoś inny mógł to zaktualizować
 
-Outdated docs are worse than missing docs.
+Nieaktualna dokumentacja jest gorsza niż jej brak.
 
-## Questions?
+## Pytania?
 
-Start in `#engineering` or ask your manager. Knowledge sharing is part of the job, not an extra activity.
+Zacznij od `#engineering` albo zapytaj swojego managera. Dzielenie się wiedzą to część pracy, a nie dodatkowe zadanie.

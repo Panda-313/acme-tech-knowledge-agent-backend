@@ -1,47 +1,47 @@
-# Incident Response
+# Obsługa incydentów
 
-## Severity Levels
+## Poziomy ważności
 
-| Severity | Description                                      | Response Time | Example |
-|----------|--------------------------------------------------|---------------|---------|
-| SEV-1    | Complete outage or data loss risk                | Immediate     | Auth down, payment processing broken |
-| SEV-2    | Major feature unavailable for many users         | < 30 min      | Knowledge Bot completely down |
-| SEV-3    | Degraded performance or partial feature failure  | < 2 hours     | High latency, some retrieval failures |
-| SEV-4    | Minor issue, workaround exists                   | Next business day | Cosmetic bug, non-critical warning |
+| Poziom | Opis                                             | Czas reakcji    | Przykład |
+|--------|--------------------------------------------------|-----------------|----------|
+| SEV-1  | Całkowita niedostępność lub ryzyko utraty danych | Natychmiast     | Auth down, niedziałające płatności |
+| SEV-2  | Kluczowa funkcja niedostępna dla wielu użytkowników | < 30 min     | Knowledge Bot całkowicie niedostępny |
+| SEV-3  | Spadek wydajności lub częściowa awaria funkcji   | < 2 godziny     | Wysokie opóźnienia, część retrievalu nie działa |
+| SEV-4  | Problem drobny, istnieje obejście                | Następny dzień roboczy | Błąd kosmetyczny, niekrytyczne ostrzeżenie |
 
-## How to Declare an Incident
+## Jak zgłosić incydent
 
-1. Post in `#incidents` with the severity and a short description
-2. If SEV-1 or SEV-2, also page the on-call engineer (PagerDuty)
-3. Create a Linear ticket with label `incident` and the severity
+1. Napisz na `#incidents` z poziomem SEV i krótkim opisem
+2. Jeśli to SEV-1 lub SEV-2, wezwij też inżyniera on-call (PagerDuty)
+3. Utwórz ticket w Linear z etykietą `incident` oraz poziomem SEV
 
-## Roles During an Incident
+## Role podczas incydentu
 
-- **Incident Commander** – coordinates, decides on communication, keeps timeline
-- **Technical Lead** – investigates and drives the fix
-- **Communications** – updates status page / internal stakeholders (often the same person for smaller incidents)
+- **Incident Commander** – koordynuje działania, decyduje o komunikacji, pilnuje osi czasu
+- **Technical Lead** – prowadzi analizę i dowozi naprawę
+- **Communications** – aktualizuje status page / interesariuszy wewnętrznych (w mniejszych incydentach często ta sama osoba)
 
-For most incidents one person wears multiple hats.
+W większości incydentów jedna osoba pełni kilka ról naraz.
 
-## Communication Expectations
+## Oczekiwania komunikacyjne
 
-- Update `#incidents` at least every 30 minutes during active SEV-1/2
-- External status page is updated for customer-facing impact
-- After resolution, a short summary is posted
+- Podczas aktywnego SEV-1/2 aktualizuj `#incidents` co najmniej co 30 minut
+- Przy wpływie na klientów aktualizuj zewnętrzną status page
+- Po rozwiązaniu incydentu opublikuj krótkie podsumowanie
 
-## Post-Incident
+## Po incydencie
 
-1. Within 48 hours: write a blameless post-mortem in Linear or Notion
-2. Identify action items with owners and due dates
-3. Share the post-mortem in `#engineering`
-4. Track action items to completion
+1. W ciągu 48 godzin: przygotuj blameless post-mortem w Linear lub Notion
+2. Zidentyfikuj action itemy z właścicielami i terminami
+3. Udostępnij post-mortem na `#engineering`
+4. Śledź realizację action itemów do końca
 
-## Useful Commands & Links
+## Przydatne komendy i linki
 
 - Status page: status.acmetech.example
-- PagerDuty: (link in 1Password)
-- Runbooks: `/docs/runbooks` in the platform repo
+- PagerDuty: (link w 1Password)
+- Runbooki: `/docs/runbooks` w repo platformy
 
-## Remember
+## Pamiętaj
 
-We practice **blameless** incident reviews. The goal is learning and system improvement, not finding who to blame.
+Stosujemy **blameless** przeglądy incydentów. Celem jest nauka i poprawa systemu, a nie szukanie winnych.

@@ -1,51 +1,51 @@
-# FAQ for Developers
+# FAQ dla developerów
 
-Quick answers to questions that come up often. If something is missing, add it via PR.
+Szybkie odpowiedzi na pytania, które pojawiają się najczęściej. Jeśli czegoś brakuje, dodaj to przez PR.
 
-## General
+## Ogólne
 
-**Q: Where is the main codebase?**  
-A: `github.com/acmetech/platform` (monorepo). Frontend lives under `/apps/web`, backend under `/services`.
+**P: Gdzie jest główny kod projektu?**  
+O: `github.com/acmetech/platform` (monorepo). Frontend jest w `/apps/web`, backend w `/services`.
 
-**Q: How do I get access to production logs?**  
-A: Ask in `#devops`. Access is granted via AWS SSO after approval.
+**P: Jak uzyskać dostęp do logów produkcyjnych?**  
+O: Zapytaj na `#devops`. Dostęp jest nadawany przez AWS SSO po akceptacji.
 
-**Q: What is the preferred branch naming?**  
-A: `feat/short-description`, `fix/ticket-123`, `chore/...`. Include the Linear ticket ID when possible.
+**P: Jak nazywamy branche?**  
+O: `feat/short-description`, `fix/ticket-123`, `chore/...`. Jeśli to możliwe, dodawaj ID ticketa z Linear.
 
-## Local Development
+## Rozwój lokalny
 
-**Q: Docker is eating all my RAM. What can I do?**  
-A: Use `docker compose up` only for the services you need. Many people run Postgres and Redis natively and only containerize the rest.
+**P: Docker zjada cały RAM. Co mogę zrobić?**  
+O: Uruchamiaj `docker compose up` tylko dla usług, których potrzebujesz. Wiele osób uruchamia lokalnie Postgresa i Redisa, a konteneryzuje tylko resztę.
 
-**Q: How do I reset the local database?**  
-A: `make db-reset` (or `alembic downgrade base && alembic upgrade head` + seed script).
+**P: Jak zresetować lokalną bazę danych?**  
+O: `make db-reset` (albo `alembic downgrade base && alembic upgrade head` + skrypt seedujący).
 
-**Q: Frontend hot reload is slow.**  
-A: Make sure you are on the latest Angular CLI and using the esbuild builder. Also try disabling source maps temporarily.
+**P: Frontend hot reload działa wolno.**  
+O: Upewnij się, że masz najnowsze Angular CLI i builder oparty o esbuild. Spróbuj też czasowo wyłączyć source mapy.
 
-## AI / RAG Related
+## AI / RAG
 
-**Q: Can I use company documents in public ChatGPT?**  
-A: No. See `ai-usage-guidelines.md`. Use local models or company-approved endpoints.
+**P: Czy mogę używać dokumentów firmowych w publicznym ChatGPT?**  
+O: Nie. Zobacz `ai-usage-guidelines.md`. Używaj modeli lokalnych albo firmowo zatwierdzonych endpointów.
 
-**Q: How do I test the Knowledge Bot locally?**  
-A: Follow the README in `/services/knowledge-bot`. You need ChromaDB running and the markdown docs indexed.
+**P: Jak przetestować lokalnie Knowledge Bota?**  
+O: Postępuj zgodnie z README w `/services/knowledge-bot`. Potrzebujesz uruchomionego ChromaDB i zindeksowanych dokumentów Markdown.
 
-**Q: Which embedding model should I use for experiments?**  
-A: Start with `all-MiniLM-L6-v2` (local, fast, free). Switch to OpenAI embeddings only when you need higher quality and have budget approval.
+**P: Jaki model embeddingów wybrać na start eksperymentów?**  
+O: Zacznij od `all-MiniLM-L6-v2` (lokalny, szybki, darmowy). Na embeddingi OpenAI przechodź dopiero, gdy potrzebujesz wyższej jakości i masz akceptację budżetu.
 
-## Process
+## Proces
 
-**Q: Do I need a Linear ticket for every PR?**  
-A: For anything larger than a typo or tiny fix – yes. It helps with prioritization and later auditing.
+**P: Czy do każdego PR potrzebuję ticketa w Linear?**  
+O: Dla wszystkiego większego niż literówka lub drobna poprawka — tak. Pomaga to w priorytetyzacji i późniejszym audycie.
 
-**Q: Who decides on new libraries?**  
-A: Tech leads + a short discussion in `#engineering`. We prefer not to add dependencies lightly.
+**P: Kto decyduje o dodawaniu nowych bibliotek?**  
+O: Tech leadzi + krótka dyskusja na `#engineering`. Staramy się nie dodawać zależności pochopnie.
 
-**Q: How often do we deploy?**  
-A: Backend services: multiple times per day. Frontend: continuous on merge to `main` (with feature flags when needed).
+**P: Jak często deployujemy?**  
+O: Usługi backendowe: kilka razy dziennie. Frontend: ciągle po merge do `main` (z feature flagami, jeśli potrzeba).
 
-## Still stuck?
+## Nadal utknąłeś(-ęłaś)?
 
-Ask in `#engineering` or the relevant team channel. Someone will help.
+Zapytaj na `#engineering` lub na odpowiednim kanale zespołu. Ktoś pomoże.

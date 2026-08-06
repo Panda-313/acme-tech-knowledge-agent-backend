@@ -1,12 +1,12 @@
-# Architecture Overview
+# Przegląd architektury
 
-High-level view of the AcmeTech platform (as of mid-2026).
+Widok wysokiego poziomu platformy AcmeTech (stan na połowę 2026 roku).
 
-## System Context
+## Kontekst systemu
 
 ```
 ┌─────────────┐     ┌──────────────────┐     ┌─────────────────┐
-│  Angular    │────▶│  API Gateway /   │────▶│  Microservices  │
+│  Angular    │────▶│  API Gateway /   │────▶│  Mikrousługi    │
 │  Frontend   │     │  FastAPI BFF     │     │  (Python)       │
 └─────────────┘     └──────────────────┘     └────────┬────────┘
                                                       │
@@ -18,44 +18,44 @@ High-level view of the AcmeTech platform (as of mid-2026).
                 └─────────────┘               └─────────────┘               └─────────────┘
 ```
 
-## Main Components
+## Główne komponenty
 
 ### Frontend (Angular)
-- Single Page Application
-- Communicates with a Backend-for-Frontend (BFF) layer
-- Uses Signals for most local state, NgRx only for complex shared state
-- Authentication via OIDC (Authorization Code + PKCE)
+- Aplikacja Single Page Application
+- Komunikuje się z warstwą Backend-for-Frontend (BFF)
+- Używa Signals dla większości stanu lokalnego, NgRx tylko dla złożonego stanu współdzielonego
+- Uwierzytelnianie przez OIDC (Authorization Code + PKCE)
 
-### Backend Services
-- **API Gateway / BFF** – FastAPI application that aggregates calls and handles auth
-- **Core Services** – user management, billing, project settings
-- **Knowledge Service** – RAG pipeline, document indexing, chat endpoints
-- **Worker** – Celery workers for long-running tasks (indexing, evaluations, reports)
+### Usługi backendowe
+- **API Gateway / BFF** – aplikacja FastAPI agregująca wywołania i obsługująca auth
+- **Core Services** – zarządzanie użytkownikami, billing, ustawienia projektów
+- **Knowledge Service** – pipeline RAG, indeksacja dokumentów, endpointy czatu
+- **Worker** – workery Celery do zadań długotrwałych (indeksacja, ewaluacje, raporty)
 
-### Data Stores
-- **PostgreSQL** – source of truth for business data
-- **Redis** – caching, rate limiting, Celery broker
-- **Vector Store** – ChromaDB (development) / Qdrant (production) for embeddings
+### Magazyny danych
+- **PostgreSQL** – źródło prawdy dla danych biznesowych
+- **Redis** – cache, rate limiting, broker dla Celery
+- **Vector Store** – ChromaDB (development) / Qdrant (production) dla embeddingów
 
-### AI Pipeline (Knowledge Bot)
-1. Documents (Markdown) are chunked
-2. Embeddings generated (local or OpenAI)
-3. Stored in vector database with metadata (source file, section, etc.)
-4. At query time: embed question → retrieve top-k chunks → build prompt → call LLM → return answer + sources
+### Pipeline AI (Knowledge Bot)
+1. Dokumenty (Markdown) są dzielone na chunki
+2. Generowane są embeddingi (lokalnie lub przez OpenAI)
+3. Embeddingi trafiają do bazy wektorowej wraz z metadanymi (plik źródłowy, sekcja itd.)
+4. W czasie zapytania: embedding pytania → pobranie top-k chunków → budowa promptu → wywołanie LLM → odpowiedź + źródła
 
-## Environments
+## Środowiska
 
-| Environment | Purpose                    | Data          |
-|-------------|----------------------------|---------------|
-| local       | Developer machines         | Synthetic     |
-| staging     | Pre-production testing     | Anonymized    |
-| production  | Live customers & internal  | Real          |
+| Środowisko | Cel                        | Dane          |
+|------------|----------------------------|---------------|
+| local      | Komputery developerów      | Syntetyczne   |
+| staging    | Testy przedprodukcyjne     | Anonimizowane |
+| production | Klienci i użytkownicy wewnętrzni | Rzeczywiste |
 
-## Key Design Principles
+## Kluczowe zasady projektowe
 
-- **Async by default** in Python services
-- **Explicit over magic** – clear boundaries between services
-- **Observability** – every request should be traceable (OpenTelemetry in progress)
-- **Fail safely** – AI features degrade gracefully when the model is unavailable
+- **Async by default** w usługach Python
+- **Explicit over magic** – czytelne granice między usługami
+- **Observability** – każde żądanie powinno być możliwe do prześledzenia (OpenTelemetry w toku)
+- **Fail safely** – funkcje AI degradowane łagodnie, gdy model jest niedostępny
 
-For deeper details see individual service READMEs and the ADRs in `/docs/adr`.
+Więcej szczegółów znajdziesz w README poszczególnych usług i ADR-ach w `/docs/adr`.

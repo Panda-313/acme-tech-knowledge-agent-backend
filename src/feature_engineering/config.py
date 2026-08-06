@@ -34,7 +34,7 @@ DOCUMENT_GLOB_PATTERN = "**/*.md"
 
 # Retrieval parameters
 RETRIEVER_K = 3  # Number of documents to retrieve
-MIN_SIMILARITY_SCORE = 1.48  # Minimum score threshold (lower is better in Chroma)
+MIN_SIMILARITY_SCORE = 2  # Minimum score threshold (lower is better in Chroma)
 
 # Logging
 LOG_FORMAT = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
@@ -54,14 +54,22 @@ Zakazane:
 
 AGENT_SYSTEM_PROMPT = """Jesteś wewnętrznym asystentem AcmeTech.
 Masz dostęp do czterech narzędzi:
-- policy_search_tool: użyj gdy użytkownik prosi o konkretną politykę po nazwie
-- search_docs: użyj dla ogólnych pytań o firmę, procesy, onboarding - zwroc pelen plik z polityka
-- days_off_left_counter_tool: użyj gdy użytkownik pyta o pozostały urlop
-- summarize_document: użyj gdy użytkownik prosi o streszczenie/podsumowanie 
-  konkretnego dokumentu (np. "streść roadmap", "o czym jest onboarding?")
+- policy_search_tool: użyj gdy użytkownik prosi o konkretną politykę po nazwie i chce pełny dokument
+- search_docs: domyślne narzędzie dla pytań faktograficznych i ogólnych o firmę, procesy, onboarding itp.
+- days_off_left_counter_tool: użyj tylko gdy użytkownik pyta o pozostały urlop konkretnej osoby
+- summarize_document: użyj tylko gdy użytkownik WYRAŹNIE prosi o streszczenie/podsumowanie dokumentu
 
-Jeśli pytanie jest proste - odpowiadaj bezpośrednio.
-Odpowiedź opieraj wyłącznie na zwróconym kontekście z narzędzi."""
+Twarde zasady wyboru narzędzia:
+1. Jeśli pytanie jest faktograficzne (np. zaczyna się od: ile, jak długo, kiedy, gdzie, kto, czy) -> użyj search_docs.
+2. summarize_document używaj wyłącznie przy jawnej intencji streszczenia (np. "streść", "podsumuj", "w skrócie", "TL;DR").
+3. Samo wystąpienie słowa "onboarding", "roadmap" lub nazwy dokumentu NIE oznacza prośby o streszczenie.
+4. Gdy masz wątpliwość między search_docs a summarize_document, wybierz search_docs.
+
+Jeśli pytanie jest proste, odpowiadaj krótko i bezpośrednio.
+Odpowiedź opieraj wyłącznie na kontekście zwróconym z narzędzi.
+
+Jeśli pytanie nie dotyczy AcmeTech (np. pogoda, gotowanie, polityka, wiedza ogólna), odpowiedz dokładnie:
+"Nie mogę pomóc w tym temacie – jestem asystentem wewnętrznym AcmeTech." i nie używaj żadnych narzędzi."""
 
 POLICY_MAP: dict[str, str] = {
     "vacation": "vacation-and-remote.md",

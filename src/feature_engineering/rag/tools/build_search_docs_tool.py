@@ -19,6 +19,9 @@ Użyj tego narzędzia gdy użytkownik pyta o:
 - wewnętrzne procesy (onboarding, code review, remote work, itp.)
 - wytyczne (AI usage, security, itp.)
 - roadmapy produktowe lub inne dokumenty wewnętrzne
+- konkretne fakty z dokumentów (np. "ile", "jak długo", "kiedy", "gdzie", "kto", "czy")
+
+To jest narzędzie DOMYŚLNE. Jeśli nie ma jasnej prośby o streszczenie dokumentu, użyj search_docs.
 
 Input: jasne zapytanie związane z AcmeTech.""")
     def search_docs(query: str) -> str:
@@ -44,4 +47,3 @@ Input: jasne zapytanie związane z AcmeTech.""")
         return "\n\n".join(formatted_results)
 
     return search_docs
-

@@ -13,9 +13,17 @@ src/api/cli.py
 src/api/types.py
 src/feature_engineering/__init__.py
 src/feature_engineering/config.py
+src/feature_engineering/models.py
 src/feature_engineering/rag/__init__.py
+src/feature_engineering/rag/agent.py
 src/feature_engineering/rag/ingestion.py
 src/feature_engineering/rag/retrieval.py
+src/feature_engineering/rag/tools/__init__.py
+src/feature_engineering/rag/tools/build_days_off_left_counter_tool.py
+src/feature_engineering/rag/tools/build_search_docs_tool.py
+src/feature_engineering/rag/tools/build_summarize_document_tool.py
+src/feature_engineering/rag/tools/policy_search_tool.py
 src/feature_engineering/scripts/__init__.py
+src/feature_engineering/scripts/eval.py
 src/feature_engineering/scripts/ingest.py
 src/feature_engineering/scripts/rag_demo.py

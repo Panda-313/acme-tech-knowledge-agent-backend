@@ -1,62 +1,62 @@
-# Deployment Process
+# Proces deploymentu
 
-## Overview
+## Przegląd
 
-We practice continuous deployment for most services. Merging to `main` triggers the pipeline.
+W większości usług stosujemy continuous deployment. Merge do `main` uruchamia pipeline.
 
-## Environments & Promotion
+## Środowiska i promocja zmian
 
 ```
-feature branch → PR → main → staging (auto) → production (manual approval for critical services)
+feature branch → PR → main → staging (auto) → production (manual approval dla krytycznych usług)
 ```
 
-- **Staging** is automatically updated on every merge to `main`.
-- **Production** deployments for the Knowledge Service and billing-related services require a manual approval step in GitHub Actions.
-- Frontend is deployed continuously with feature flags when risk is higher.
+- **Staging** aktualizuje się automatycznie po każdym merge do `main`.
+- **Production** dla Knowledge Service i usług powiązanych z billingiem wymaga kroku manual approval w GitHub Actions.
+- Frontend deployujemy ciągle, używając feature flag przy wyższym ryzyku.
 
-## Pipeline Steps (simplified)
+## Kroki pipeline’u (uproszczone)
 
-1. Lint & type-check
-2. Unit + integration tests
-3. Build Docker images
-4. Push to container registry
-5. Deploy to staging
-6. Smoke tests on staging
-7. (Optional) Manual approval
-8. Deploy to production
-9. Post-deploy health checks
+1. Lint i type-check
+2. Testy unit i integracyjne
+3. Build obrazów Dockera
+4. Push do rejestru kontenerów
+5. Deploy na staging
+6. Smoke testy na staging
+7. (Opcjonalnie) Manual approval
+8. Deploy na production
+9. Kontrole zdrowia po deployu
 
-## Feature Flags
+## Feature flagi
 
-We use a simple internal feature-flag service (and LaunchDarkly for some customer-facing flags).  
-Large or risky changes should be behind a flag so they can be turned off without a rollback.
+Używamy prostego wewnętrznego serwisu feature flag (a dla części funkcji klienckich także LaunchDarkly).  
+Duże lub ryzykowne zmiany powinny być za flagą, żeby dało się je wyłączyć bez rollbacku.
 
-## Database Migrations
+## Migracje bazy danych
 
-- Migrations are written with Alembic.
-- They run automatically as part of the deployment job **before** the new application version starts.
-- Breaking changes (column drops, renames) must be done in two phases (expand → contract) and coordinated with the team.
+- Migracje piszemy w Alembic.
+- Uruchamiają się automatycznie w jobie deploymentowym **przed** startem nowej wersji aplikacji.
+- Zmiany breaking (usuwanie kolumn, zmiany nazw) robimy dwuetapowo (expand → contract) i koordynujemy z zespołem.
 
-## Rollbacks
+## Rollbacki
 
-- Application rollback: re-deploy the previous image tag (one click in the GitHub Actions UI or via CLI).
-- Database rollback: only possible if the migration was reversible and no data loss occurred. Prefer forward fixes.
+- Rollback aplikacji: redeploy poprzedniego taga obrazu (jednym kliknięciem w GitHub Actions UI lub przez CLI).
+- Rollback bazy: możliwy tylko przy odwracalnej migracji i braku utraty danych. Preferujemy poprawki forward.
 
-## Hotfixes
+## Hotfixy
 
-1. Branch from `main`
-2. Fix + tests
-3. Fast-track review (1 approval minimum)
-4. Merge and deploy
-5. Write a short incident note in Linear
+1. Utwórz branch od `main`
+2. Wprowadź fix + testy
+3. Szybki review (minimum 1 approval)
+4. Merge i deploy
+5. Dodaj krótką notatkę o incydencie w Linear
 
-## Monitoring After Deploy
+## Monitoring po deployu
 
-- Watch the `#deploys` Slack channel
-- Check Grafana dashboards for error rate, latency, and saturation
-- AI services: also monitor token usage and retrieval quality metrics
+- Obserwuj kanał Slack `#deploys`
+- Sprawdzaj dashboardy Grafany pod kątem error rate, latency i saturation
+- Dla usług AI monitoruj też zużycie tokenów i metryki jakości retrievalu
 
-## Who Can Deploy?
+## Kto może deployować?
 
-- Any engineer can merge to `main` (after review).
-- Production approvals for critical paths are limited to tech leads and on-call engineers.
+- Każdy inżynier może mergować do `main` (po review).
+- Approvale produkcyjne dla krytycznych ścieżek są ograniczone do tech leadów i inżynierów on-call.

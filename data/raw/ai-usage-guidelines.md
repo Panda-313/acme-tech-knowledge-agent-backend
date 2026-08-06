@@ -1,57 +1,57 @@
-# AI Usage Guidelines at AcmeTech
+# Wytyczne korzystania z AI w AcmeTech
 
-Last updated: June 2026
+Ostatnia aktualizacja: czerwiec 2026
 
-## Purpose
+## Cel
 
-These guidelines help us use AI tools productively while protecting company data, customer privacy, and code quality.
+Te wytyczne pomagają produktywnie korzystać z narzędzi AI przy jednoczesnej ochronie danych firmy, prywatności klientów i jakości kodu.
 
-## Allowed Tools
+## Dozwolone narzędzia
 
-| Tool                    | Allowed | Notes |
-|-------------------------|---------|-------|
-| GitHub Copilot          | ✅      | Company license |
-| Cursor / Windsurf       | ✅      | With company account |
-| ChatGPT / Claude (web)  | ✅      | Do **not** paste secrets or customer data |
-| Groq / OpenAI API       | ✅      | Use company keys only |
-| Local models (Ollama)   | ✅      | Preferred for sensitive code |
-| Public free tools       | ⚠️      | Only for non-sensitive, non-proprietary content |
+| Narzędzie              | Dozwolone | Uwagi |
+|------------------------|-----------|-------|
+| GitHub Copilot         | ✅        | Licencja firmowa |
+| Cursor / Windsurf      | ✅        | Z kontem firmowym |
+| ChatGPT / Claude (web) | ✅        | **Nie** wklejaj sekretów ani danych klientów |
+| Groq / OpenAI API      | ✅        | Używaj tylko firmowych kluczy |
+| Modele lokalne (Ollama)| ✅        | Preferowane dla wrażliwego kodu |
+| Publiczne darmowe narzędzia | ⚠️   | Tylko dla treści niewrażliwych i niezastrzeżonych |
 
-## Golden Rules
+## Złote zasady
 
-1. **Never paste secrets, API keys, passwords, or customer PII** into any external AI tool.
-2. **Never commit AI-generated code without reviewing it.** You own every line that lands in `main`.
-3. Prefer **local models** (Ollama) or company-approved APIs when working with internal documents or customer data.
-4. AI is a **pair programmer**, not an author. You must understand the code you submit.
-5. When using AI for architecture or design decisions, document the reasoning in the PR or Linear ticket.
+1. **Nigdy nie wklejaj sekretów, kluczy API, haseł ani PII klientów** do zewnętrznych narzędzi AI.
+2. **Nigdy nie commituj kodu wygenerowanego przez AI bez review.** Odpowiadasz za każdą linię, która trafia do `main`.
+3. Przy pracy z dokumentami wewnętrznymi lub danymi klientów preferuj **modele lokalne** (Ollama) albo firmowo zatwierdzone API.
+4. AI to **pair programmer**, nie autor. Musisz rozumieć kod, który wysyłasz.
+5. Korzystając z AI przy decyzjach architektonicznych lub projektowych, dokumentuj uzasadnienie w PR albo tickecie Linear.
 
-## What Is Encouraged
+## Co jest zalecane
 
-- Generating boilerplate, tests, and documentation drafts
-- Explaining unfamiliar code or error messages
-- Brainstorming alternative implementations
-- Writing commit messages and PR descriptions
-- Creating synthetic test data
-- Building internal RAG prototypes (like this Knowledge Bot)
+- Generowanie boilerplate’u, testów i szkiców dokumentacji
+- Wyjaśnianie nieznanego kodu lub komunikatów błędów
+- Burza mózgów nad alternatywnymi implementacjami
+- Pisanie commit message i opisów PR
+- Tworzenie syntetycznych danych testowych
+- Budowa wewnętrznych prototypów RAG (jak ten Knowledge Bot)
 
-## What Is Discouraged / Forbidden
+## Co jest odradzane / zabronione
 
-- Submitting large AI-generated PRs without meaningful human review
-- Using public AI tools with production database schemas or real customer data
-- Generating code that bypasses our security or authentication patterns
-- Relying on AI for final architectural decisions without team discussion
+- Wysyłanie dużych PR-ów wygenerowanych przez AI bez sensownego review człowieka
+- Używanie publicznych narzędzi AI z produkcyjnymi schematami bazy lub realnymi danymi klientów
+- Generowanie kodu omijającego nasze wzorce bezpieczeństwa i uwierzytelniania
+- Poleganie na AI przy finalnych decyzjach architektonicznych bez dyskusji z zespołem
 
-## RAG & Internal Knowledge
+## RAG i wiedza wewnętrzna
 
-We are actively building internal RAG systems (see Knowledge Bot initiative).  
-When contributing to these systems:
+Aktywnie budujemy wewnętrzne systemy RAG (zob. inicjatywa Knowledge Bot).  
+Wnosząc wkład do tych systemów:
 
-- Only index documents that are already approved for internal distribution
-- Do not index customer data or personal employee information unless explicitly approved by Legal/People Ops
-- Always show sources in answers when the system supports it
+- Indeksuj wyłącznie dokumenty zatwierdzone do dystrybucji wewnętrznej
+- Nie indeksuj danych klientów ani danych osobowych pracowników bez wyraźnej zgody Legal/People Ops
+- Zawsze pokazuj źródła w odpowiedziach, jeśli system to wspiera
 
-## Reporting Issues
+## Zgłaszanie incydentów
 
-If you discover that sensitive data was accidentally sent to an external model, notify `#security` immediately.
+Jeśli wykryjesz, że dane wrażliwe zostały przypadkowo wysłane do zewnętrznego modelu, natychmiast powiadom `#security`.
 
-Questions about these guidelines → ask in `#ai-experiments` or message Sofia (@sofia).
+Pytania o te wytyczne → napisz na `#ai-experiments` lub do Sofii (@sofia).

@@ -1,69 +1,69 @@
-# AcmeTech Onboarding Guide
+# Przewodnik onboardingowy AcmeTech
 
-Welcome to AcmeTech! We're building the next generation of Angular + AI applications. This guide will help you get productive in your first two weeks.
+Witamy w AcmeTech! Budujemy kolejną generację aplikacji Angular + AI. Ten przewodnik pomoże Ci szybko wejść w pracę podczas pierwszych dwóch tygodni.
 
-## Your First Day
+## Pierwszy dzień
 
-1. **Accounts & Access**
-   - Slack (company workspace) – join `#general`, `#engineering`, `#ai-experiments`
-   - GitHub Enterprise – request access via IT ticket
-   - 1Password – company vault will be shared with you
-   - Google Workspace – calendar, Drive, email
-   - Linear – project management (invite will be sent by your manager)
+1. **Konta i dostępy**
+   - Slack (workspace firmy) – dołącz do `#general`, `#engineering`, `#ai-experiments`
+   - GitHub Enterprise – poproś o dostęp przez ticket IT
+   - 1Password – firmowy vault zostanie Ci udostępniony
+   - Google Workspace – kalendarz, Drive, email
+   - Linear – zarządzanie projektami (zaproszenie wyśle manager)
 
-2. **Hardware**
-   - MacBook Pro M-series (or Linux workstation if preferred)
-   - External monitor and docking station available on request
+2. **Sprzęt**
+   - MacBook Pro M-series (lub stacja Linux, jeśli wolisz)
+   - Monitor zewnętrzny i stacja dokująca dostępne na życzenie
 
-3. **Required Reading (Day 1)**
+3. **Materiały obowiązkowe (dzień 1)**
    - `tech-stack.md`
    - `security-basics.md`
    - `ai-usage-guidelines.md`
-   - Company values (shared in Drive)
+   - Wartości firmy (udostępnione na Drive)
 
-## Week 1 Checklist
+## Checklista na 1. tydzień
 
-- [ ] Set up local development environment (see `tech-stack.md`)
-- [ ] Complete security training (30 min, link in Slack)
-- [ ] Pair with a buddy on a small ticket
-- [ ] Attend the weekly Engineering Sync (Tuesday 10:00)
-- [ ] Introduce yourself in `#engineering` with a short note about your background
+- [ ] Skonfiguruj lokalne środowisko deweloperskie (zob. `tech-stack.md`)
+- [ ] Ukończ szkolenie security (30 min, link na Slacku)
+- [ ] Zrób pairing z buddy na małym tickecie
+- [ ] Weź udział w cotygodniowym Engineering Sync (wtorek 10:00)
+- [ ] Przedstaw się na `#engineering` krótką notką o swoim doświadczeniu
 
-## Development Setup
+## Konfiguracja środowiska developerskiego
 
 ```bash
-# Clone the main monorepo
+# Sklonuj główne monorepo
 git clone git@github.com:acmetech/platform.git
 cd platform
 
-# Install dependencies
+# Zainstaluj zależności
 npm install          # frontend
 pip install -r requirements.txt  # backend
 
-# Start local services
+# Uruchom lokalne usługi
 docker compose up -d   # Postgres, Redis, Chroma
 ```
 
-Full setup instructions are in the `README.md` of the platform repo.
+Pełna instrukcja setupu znajduje się w `README.md` repo platformy.
 
-## Culture & Communication
+## Kultura i komunikacja
 
-- We value **ownership** and **direct feedback**.
-- Default to async communication (Linear comments, Slack threads).
-- Meetings have agendas and notes. If a meeting has no agenda, you can decline.
-- We ship small, frequently. Prefer PRs under 400 lines when possible.
+- Cenimy **ownership** i **bezpośredni feedback**.
+- Domyślnie preferujemy komunikację asynchroniczną (komentarze w Linear, wątki na Slacku).
+- Spotkania mają agendy i notatki. Jeśli spotkanie nie ma agendy, możesz je odrzucić.
+- Dostarczamy małe zmiany, ale często. Tam, gdzie to możliwe, preferujemy PR-y poniżej 400 linii.
 
-## People to Know
+## Kluczowe osoby
 
-| Role              | Name          | Slack handle   |
-|-------------------|---------------|----------------|
-| Engineering Manager | Anna Kowalska | @anna          |
-| Tech Lead (Frontend) | Marek Nowak | @marek         |
-| Tech Lead (AI)    | Sofia Rivera  | @sofia         |
-| People Ops        | Tom Ellis     | @tom           |
+| Rola                  | Imię i nazwisko | Slack |
+|-----------------------|------------------|-------|
+| Engineering Manager   | Anna Kowalska    | @anna |
+| Tech Lead (Frontend)  | Marek Nowak      | @marek |
+| Tech Lead (AI)        | Sofia Rivera     | @sofia |
+| People Ops            | Tom Ellis        | @tom |
 
-## Questions?
+## Pytania?
 
-Ask in `#onboarding` or message your manager. There are no stupid questions in the first month.
+Zapytaj na `#onboarding` albo napisz do managera. W pierwszym miesiącu nie ma głupich pytań.
 
-Welcome aboard – we're glad you're here.
+Witamy na pokładzie — cieszymy się, że jesteś z nami.

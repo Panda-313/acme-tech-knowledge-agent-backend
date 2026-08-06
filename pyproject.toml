@@ -25,6 +25,7 @@ dependencies = [
 ingest = "src.feature_engineering.scripts.ingest:main"
 rag-demo = "src.feature_engineering.scripts.rag_demo:main"
 api = "src.api.cli:main"
+eval = "src.feature_engineering.scripts.eval:main"
 
 [tool.uv]
 package = true

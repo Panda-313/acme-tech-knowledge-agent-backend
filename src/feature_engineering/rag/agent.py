@@ -6,6 +6,7 @@ import os
 from typing import Any
 
 from langchain.agents import create_agent
+from langchain_core.messages import AIMessage
 from langchain_openai import ChatOpenAI
 from langgraph.checkpoint.memory import InMemorySaver
 
@@ -32,7 +33,9 @@ def ask_question_agent(
     checkpointer: InMemorySaver | None = None,
     logger: logging.Logger | None = None,
     min_score: float = MIN_SIMILARITY_SCORE,
-    thread_id: int = 1
+    thread_id: int = 1,
+    llm_max_retries: int = 2,
+    llm_timeout_seconds: float = 60.0,
 ) -> Answer:
     logger = logger or logging.getLogger(__name__)
     used_sources: list[str] = []
@@ -43,7 +46,13 @@ def ask_question_agent(
     days_off_left_counter_tool = build_calculate_leave_days_tool(logger, current_user)
     summarize_document_tool = build_summarize_document_tool(logger, used_sources, api_key)
 
-    llm = ChatOpenAI(model=LLM_MODEL_NAME, api_key=api_key)
+    llm = ChatOpenAI(
+        model=LLM_MODEL_NAME,
+        api_key=api_key,
+        temperature=0,
+        max_retries=llm_max_retries,
+        timeout=llm_timeout_seconds,
+    )
     thread_config = {"configurable": {"thread_id": thread_id}}
 
     agent = create_agent(
@@ -54,31 +63,41 @@ def ask_question_agent(
         checkpointer=checkpointer,
     )
 
+
     result = agent.invoke(
         {"messages": [{"role": "user", "content": question}]},
         config=thread_config,
     )
 
+    used_tools = []
+
+    for message in result["messages"]:
+        if isinstance(message, AIMessage):
+            used_tools.extend(
+                tool_call['name'].removeprefix('functions.')
+                for tool_call in message.tool_calls
+            )
+
+    return add_source(used_sources, used_tools, result)
+
+
+def add_source(used_sources: list[str], used_tools: list[str], result) -> Answer:
     structured_response = result.get("structured_response")
 
-
-    return add_source(structured_response, used_sources, result)
-
-
-def add_source(structured_response: Answer | dict, used_sources: list[str], result) -> Answer:
     if isinstance(structured_response, Answer):
+        updates = {}
         if not structured_response.sources and used_sources:
-            return structured_response.model_copy(update={"sources": used_sources})
-        return structured_response
+            updates["sources"] = used_sources
+        updates["used_tools"] = used_tools
+        return structured_response.model_copy(update=updates)
 
     if isinstance(structured_response, dict):
-        answer = Answer.model_validate(structured_response)
-        if not answer.sources and used_sources:
-            return answer.model_copy(update={"sources": used_sources})
-        return answer
+        structured_response["sources"] = structured_response.get("sources") or used_sources
+        structured_response["used_tools"] = used_tools
+        return Answer.model_validate(structured_response)
 
     messages = result.get("messages", [])
     answer_text = str(messages[-1].content).strip() if messages else "Nie wiem"
     if not answer_text:
         answer_text = "Nie wiem"
-    return Answer(answer=answer_text, sources=used_sources)
+    return Answer(answer=answer_text, sources=used_sources, used_tools=used_tools)

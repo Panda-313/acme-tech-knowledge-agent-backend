@@ -1,64 +1,64 @@
-# Code Review Policy
+# Polityka code review
 
-Effective: January 2026
+Obowiązuje od: styczeń 2026
 
-## Goals
+## Cele
 
-- Catch bugs and design issues early
-- Share knowledge across the team
-- Keep the codebase maintainable and consistent
-- Avoid blocking velocity with unnecessary bureaucracy
+- Wczesne wykrywanie błędów i problemów projektowych
+- Dzielenie się wiedzą w zespole
+- Utrzymanie kodu w stanie spójnym i łatwym do rozwijania
+- Unikanie blokowania velocity przez zbędną biurokrację
 
-## Required Approvals
+## Wymagane approvale
 
-| Change Type                    | Required Approvals | Who can approve |
-|--------------------------------|--------------------|-----------------|
-| Regular feature / bugfix       | 1                  | Any senior or tech lead |
-| Changes to auth, payments, security | 2             | At least one tech lead |
-| Database migrations            | 1 + DBA review     | Tech lead + designated reviewer |
-| AI / RAG pipeline changes      | 1                  | AI team member preferred |
-| Documentation only             | 0 (self-merge OK)  | — |
+| Typ zmiany                      | Wymagane approvale | Kto może zatwierdzić |
+|---------------------------------|--------------------|----------------------|
+| Standardowa funkcja / bugfix    | 1                  | Dowolny senior lub tech lead |
+| Zmiany w auth, płatnościach, security | 2           | Co najmniej jeden tech lead |
+| Migracje bazy danych            | 1 + review DBA     | Tech lead + wyznaczony reviewer |
+| Zmiany w pipeline AI / RAG      | 1                  | Preferowany członek zespołu AI |
+| Tylko dokumentacja              | 0 (self-merge OK)  | — |
 
-## Pull Request Guidelines
+## Wytyczne dla Pull Requestów
 
-### Before Opening a PR
-- [ ] Code builds and tests pass locally
-- [ ] You have self-reviewed the diff
-- [ ] PR description explains *why*, not only *what*
-- [ ] Linked Linear ticket (if applicable)
-- [ ] Screenshots / recordings for UI changes
+### Przed otwarciem PR
+- [ ] Kod buduje się i testy przechodzą lokalnie
+- [ ] Wykonałeś(-aś) self-review diffa
+- [ ] Opis PR wyjaśnia *dlaczego*, a nie tylko *co*
+- [ ] Podlinkowany ticket z Linear (jeśli dotyczy)
+- [ ] Screenshoty / nagrania dla zmian UI
 
-### PR Size
-- Prefer PRs under **400 lines** of meaningful code change.
-- Larger changes should be split into stacked PRs when possible.
+### Rozmiar PR
+- Preferujemy PR-y poniżej **400 linii** istotnej zmiany kodu.
+- Większe zmiany, jeśli to możliwe, dziel na stacked PR.
 
-### Review Turnaround
-- Reviewers should respond within **1 business day**.
-- If blocked, leave a comment and move on — do not leave PRs in limbo.
+### Czas odpowiedzi na review
+- Reviewer powinien odpowiedzieć w ciągu **1 dnia roboczego**.
+- Jeśli jest blokada, zostaw komentarz i przejdź dalej — nie zostawiaj PR-ów w zawieszeniu.
 
-## What Reviewers Should Look For
+## Na co reviewer powinien zwracać uwagę
 
-1. **Correctness** – Does it do what it claims?
-2. **Readability** – Will someone understand this in 6 months?
-3. **Tests** – Are the important paths covered?
-4. **Security** – Any secrets, injection risks, or over-permissioned code?
-5. **Performance** – Obvious N+1 queries or large payloads?
-6. **Consistency** – Follows existing patterns in the codebase?
+1. **Correctness** – czy zmiana robi to, co deklaruje?
+2. **Readability** – czy ktoś zrozumie to za 6 miesięcy?
+3. **Testy** – czy kluczowe ścieżki są pokryte?
+4. **Security** – sekrety, ryzyka wstrzyknięć, zbyt szerokie uprawnienia?
+5. **Performance** – oczywiste N+1 lub zbyt duże payloady?
+6. **Consistency** – zgodność z istniejącymi wzorcami w repo?
 
-## Approval & Merge
+## Approval i merge
 
-- Use GitHub "Approve" or "Request changes".
-- Once approved, the author merges (or the reviewer if the author is unavailable).
-- Squash merge is the default. Rebase only when history must stay linear.
+- W GitHub używaj „Approve” albo „Request changes”.
+- Po approvalu merguje autor (lub reviewer, jeśli autora nie ma).
+- Domyślnie używamy squash merge. Rebase tylko gdy historia musi pozostać liniowa.
 
-## Hotfixes
+## Hotfixy
 
-For production incidents:
-- Create a branch from `main`
-- Get at least one approval (can be async via Slack in extreme cases)
-- Merge and deploy immediately
-- Follow up with a proper post-mortem ticket
+Dla incydentów produkcyjnych:
+- Utwórz branch od `main`
+- Zdobądź co najmniej jeden approval (w skrajnych przypadkach może być asynchronicznie przez Slack)
+- Zmerguj i wdrażaj od razu
+- Potem dodaj właściwy ticket post-mortem
 
-## Exceptions
+## Wyjątki
 
-Tech leads may grant temporary exceptions for urgent customer work. Document the exception in the PR description.
+Tech leadzi mogą czasowo przyznać wyjątki dla pilnych prac klientowskich. Opisz wyjątek w opisie PR.

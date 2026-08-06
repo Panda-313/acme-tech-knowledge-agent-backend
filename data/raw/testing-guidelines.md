@@ -1,57 +1,57 @@
-# Testing Guidelines
+# Wytyczne testowania
 
-## Philosophy
+## Filozofia
 
-We write tests that give us confidence to refactor and ship quickly.  
-We do **not** aim for 100% coverage – we aim for high confidence on the paths that matter.
+Piszemy testy, które dają pewność przy refaktorze i szybkim dowożeniu zmian.  
+**Nie** celujemy w 100% pokrycia — celujemy w wysoką pewność na ścieżkach, które naprawdę mają znaczenie.
 
-## Test Pyramid (practical version)
+## Piramida testów (wersja praktyczna)
 
-| Type              | Tooling                          | When to write                          | Speed expectation |
-|-------------------|----------------------------------|----------------------------------------|-------------------|
-| Unit              | Jest (FE) / pytest (BE)          | Pure logic, utilities, services        | Very fast         |
-| Component         | Angular Testing Library          | UI components with non-trivial logic   | Fast              |
-| Integration       | pytest + httpx / TestClient      | API endpoints, DB interactions         | Medium            |
-| End-to-End        | Playwright                       | Critical user journeys                 | Slower            |
-| AI / RAG eval     | Custom scripts + Ragas           | Answer quality, retrieval relevance    | Can be slow       |
+| Typ               | Narzędzia                         | Kiedy pisać                              | Oczekiwana szybkość |
+|-------------------|-----------------------------------|------------------------------------------|---------------------|
+| Unit              | Jest (FE) / pytest (BE)           | Czysta logika, utility, serwisy          | Bardzo szybko       |
+| Component         | Angular Testing Library           | Komponenty UI z nietrywialną logiką      | Szybko              |
+| Integration       | pytest + httpx / TestClient       | Endpointy API, interakcje z bazą         | Średnio             |
+| End-to-End        | Playwright                        | Krytyczne ścieżki użytkownika            | Wolniej             |
+| AI / RAG eval     | Custom scripts + Ragas            | Jakość odpowiedzi, trafność retrievalu   | Może być wolno      |
 
 ## Frontend
 
-- Prefer Testing Library queries (`getByRole`, `getByLabelText`) over test IDs when possible.
-- Test user-visible behavior, not implementation details.
-- Snapshot tests are allowed sparingly (mostly for complex presentational components).
+- Gdzie to możliwe, preferuj zapytania Testing Library (`getByRole`, `getByLabelText`) zamiast test ID.
+- Testuj zachowanie widoczne dla użytkownika, nie szczegóły implementacyjne.
+- Snapshot testy stosuj oszczędnie (głównie przy złożonych komponentach prezentacyjnych).
 
 ## Backend
 
-- Use `pytest` fixtures and factories (factory-boy or polyfactory).
-- Prefer testing against a real test database (Docker) rather than heavy mocking of the ORM.
-- Mark slow tests with `@pytest.mark.slow` so they can be skipped in quick local runs.
+- Używaj fixture’ów i factory w `pytest` (factory-boy lub polyfactory).
+- Preferuj testy na realnej testowej bazie (Docker), zamiast ciężkiego mockowania ORM.
+- Oznaczaj wolne testy `@pytest.mark.slow`, by można je było pominąć w szybkim lokalnym przebiegu.
 
-## AI / RAG Specific
+## Specyfika AI / RAG
 
-For the Knowledge Bot and similar systems we maintain a small golden set of questions:
+Dla Knowledge Bota i podobnych systemów utrzymujemy mały „golden set” pytań:
 
-- Expected answer should contain certain key facts
-- Sources should include specific documents
-- We track hallucination rate and retrieval precision over time
+- Oczekiwana odpowiedź powinna zawierać konkretne kluczowe fakty
+- Źródła powinny zawierać wskazane dokumenty
+- Śledzimy w czasie współczynnik halucynacji i precyzję retrievalu
 
-Run the evaluation suite before merging significant changes to the retrieval or prompting logic.
+Przed mergem istotnych zmian w retrievalu lub promptingu uruchom zestaw ewaluacyjny.
 
-## What Must Be Tested Before Merge
+## Co musi być przetestowane przed mergem
 
-- New API endpoints → at least happy path + one error case
-- Business logic that handles money, permissions, or data deletion
-- Changes to the RAG pipeline → evaluation set should still pass
-- UI flows that are part of the critical path (login, main chat, etc.)
+- Nowe endpointy API → co najmniej happy path + jeden case błędny
+- Logika biznesowa obsługująca pieniądze, uprawnienia lub usuwanie danych
+- Zmiany w pipeline RAG → zbiór ewaluacyjny nadal powinien przechodzić
+- Flow UI będące częścią krytycznej ścieżki (logowanie, główny chat itd.)
 
 ## Continuous Integration
 
-- All tests run on every PR
-- E2E tests run on `main` and on PRs that touch critical paths
-- Coverage reports are generated but not used as hard gates
+- Wszystkie testy uruchamiają się na każdym PR
+- Testy E2E uruchamiają się na `main` oraz na PR, które dotykają krytycznych ścieżek
+- Raporty coverage są generowane, ale nie stanowią twardego gate’a
 
-## Tips
+## Wskazówki
 
-- If a test is flaky, fix it or delete it. Flaky tests destroy trust.
-- Prefer fewer, better tests over many brittle ones.
-- When in doubt, ask: “If this breaks, will a test catch it before a user does?”
+- Jeśli test jest flaky, napraw go albo usuń. Flaky testy niszczą zaufanie.
+- Preferuj mniej testów, ale lepszych, zamiast wielu kruchych.
+- Gdy masz wątpliwości, zapytaj: „Jeśli to się zepsuje, czy test złapie to zanim zobaczy to użytkownik?”

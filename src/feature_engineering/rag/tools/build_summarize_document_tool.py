@@ -1,7 +1,6 @@
 """Tool for summarizing internal company documents."""
 
 import logging
-import os
 
 from pydantic import SecretStr
 
@@ -27,8 +26,11 @@ def build_summarize_document_tool(
 
 Użyj tego narzędzia gdy użytkownik prosi o:
 - streszczenie konkretnego dokumentu ("streść mi roadmap", "podsumuj onboarding")
-- krótki przegląd ("o czym jest dokument X?", "w skrócie co zawiera Y?")
+- krótki przegląd treści dokumentu ("w skrócie co zawiera Y?")
 - szybkie podsumowanie zamiast pełnej treści
+
+NIE używaj tego narzędzia, gdy pytanie jest faktograficzne lub punktowe
+(np. "ile", "jak długo", "kiedy", "gdzie", "kto", "czy"). Wtedy użyj search_docs.
 
 Dostępne dokumenty: vacation, remote_work, ai_usage, code_review, security, deployment, incident_response, testing, api_design, performance, knowledge_sharing, onboarding, architecture, tech_stack, team_structure, roadmap, faq
 
@@ -54,7 +56,7 @@ Output: zwięzłe streszczenie w 3-5 punktach.""")
         if full_document_path not in used_sources:
             used_sources.append(str(full_document_path))
 
-        llm = ChatOpenAI(model=LLM_MODEL_NAME, api_key=api_key)
+        llm = ChatOpenAI(model=LLM_MODEL_NAME, api_key=api_key, temperature=0)
         prompt = SUMMARIZE_PROMPT.format(content=content)
         response = llm.invoke(prompt)
 

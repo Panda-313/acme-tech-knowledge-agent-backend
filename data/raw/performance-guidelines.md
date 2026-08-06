@@ -1,54 +1,54 @@
-# Performance Guidelines
+# Wytyczne wydajnościowe
 
 ## Frontend (Angular)
 
-### Budgets (enforced in CI where possible)
+### Budżety (egzekwowane w CI tam, gdzie to możliwe)
 
-| Metric                        | Target          | Hard Limit |
-|-------------------------------|-----------------|------------|
-| Initial bundle (main)         | < 200 KB gzip   | 300 KB     |
-| Largest Contentful Paint      | < 2.0 s         | 2.5 s      |
-| Time to Interactive           | < 3.0 s         | 3.5 s      |
-| Cumulative Layout Shift       | < 0.1           | 0.15       |
+| Metryka                       | Cel             | Twardy limit |
+|-------------------------------|-----------------|--------------|
+| Initial bundle (main)         | < 200 KB gzip   | 300 KB       |
+| Largest Contentful Paint      | < 2.0 s         | 2.5 s        |
+| Time to Interactive           | < 3.0 s         | 3.5 s        |
+| Cumulative Layout Shift       | < 0.1           | 0.15         |
 
-### Best Practices
+### Dobre praktyki
 
-- Prefer Signals and `OnPush` (or the new signal-based components)
-- Lazy-load routes and heavy libraries
-- Avoid large third-party packages when a lighter alternative exists
-- Use `trackBy` (or the new control-flow equivalents) in lists
-- Images: modern formats (WebP/AVIF), proper sizing, lazy loading
-- Measure with Lighthouse and the Angular DevTools profiler
+- Preferuj Signals i `OnPush` (albo nowe komponenty oparte o sygnały)
+- Stosuj lazy loading dla tras i ciężkich bibliotek
+- Unikaj dużych paczek third-party, jeśli istnieje lżejsza alternatywa
+- Używaj `trackBy` (lub odpowiedników w nowym control-flow) na listach
+- Obrazy: nowoczesne formaty (WebP/AVIF), poprawne rozmiary, lazy loading
+- Mierz przez Lighthouse i profiler Angular DevTools
 
 ## Backend (FastAPI / Python)
 
-### Targets
+### Cele
 
-- p95 latency for simple read endpoints: < 100 ms
-- p95 latency for complex endpoints (including RAG): < 1.5 s
-- Error rate: < 0.1 % under normal load
+- Opóźnienie p95 dla prostych endpointów odczytowych: < 100 ms
+- Opóźnienie p95 dla endpointów złożonych (w tym RAG): < 1.5 s
+- Error rate: < 0.1% przy normalnym obciążeniu
 
-### Best Practices
+### Dobre praktyki
 
-- Use async endpoints and async database drivers where it matters
-- Avoid N+1 queries – use `selectinload` / `joinedload` or explicit joins
-- Cache expensive or frequently accessed data in Redis with clear TTLs
-- Paginate list endpoints by default
-- Set sensible timeouts on external calls (LLM providers especially)
+- Używaj endpointów async i asynchronicznych driverów bazy tam, gdzie to istotne
+- Unikaj zapytań N+1 — stosuj `selectinload` / `joinedload` albo jawne joiny
+- Cache’uj kosztowne lub często używane dane w Redisie z jasno określonym TTL
+- Domyślnie paginuj endpointy listujące
+- Ustaw sensowne timeouty dla wywołań zewnętrznych (szczególnie do dostawców LLM)
 
-## RAG / AI Specific
+## RAG / AI
 
-- Keep retrieved context under a reasonable token budget (monitor cost and latency)
-- Cache embeddings of static documents
-- Prefer smaller, faster models for classification / routing; reserve larger models for final generation
-- Always measure end-to-end latency (retrieval + generation)
+- Utrzymuj kontekst z retrievalu w rozsądnym budżecie tokenów (monitoruj koszt i opóźnienie)
+- Cache’uj embeddingi statycznych dokumentów
+- Do klasyfikacji / routingu preferuj mniejsze i szybsze modele; większe rezerwuj do końcowej generacji
+- Zawsze mierz opóźnienie end-to-end (retrieval + generation)
 
 ## Monitoring
 
-- Frontend: Real User Monitoring (in progress) + Lighthouse CI
-- Backend: OpenTelemetry traces + Prometheus metrics
-- AI: token usage, retrieval latency, answer latency, evaluation scores
+- Frontend: Real User Monitoring (w toku) + Lighthouse CI
+- Backend: trace’y OpenTelemetry + metryki Prometheus
+- AI: zużycie tokenów, opóźnienie retrievalu, opóźnienie odpowiedzi, wyniki ewaluacji
 
-## When Performance Becomes a Feature
+## Gdy wydajność staje się funkcją
 
-If a change significantly improves (or degrades) one of the key metrics above, mention it in the PR description and consider adding a note to the relevant team channel.
+Jeśli zmiana istotnie poprawia (lub pogarsza) jedną z kluczowych metryk powyżej, opisz to w PR i rozważ notkę na odpowiednim kanale zespołu.

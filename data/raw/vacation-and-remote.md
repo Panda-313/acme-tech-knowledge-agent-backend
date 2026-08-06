@@ -1,59 +1,59 @@
-# Vacation, Time Off & Remote Work Policy
+# Polityka urlopowa, nieobecności i pracy zdalnej
 
-Effective: March 2026
+Obowiązuje od: marzec 2026
 
-## Time Off
+## Nieobecności
 
-### Paid Time Off (PTO)
-- **25 days** of paid vacation per calendar year
-- Accrues monthly (approximately 2.08 days/month)
-- Unused days can be carried over up to **5 days** into the next year
-- Additional public holidays according to your contract country
+### Płatny urlop wypoczynkowy (PTO)
+- **25 dni** płatnego urlopu rocznie
+- Naliczanie miesięczne (około 2,08 dnia/miesiąc)
+- Niewykorzystany urlop można przenieść do kolejnego roku, maksymalnie **5 dni**
+- Dodatkowe dni ustawowo wolne zgodnie z krajem wskazanym w umowie
 
-### Sick Leave
-- Unlimited reasonable sick leave (we trust you)
-- For absences longer than 3 consecutive days, a doctor's note is appreciated but not always required
-- Notify your manager and update Linear / calendar as early as possible
+### Zwolnienie chorobowe
+- Nielimitowane, rozsądne zwolnienia chorobowe (zakładamy zaufanie)
+- Przy nieobecności dłuższej niż 3 kolejne dni zaświadczenie lekarskie jest mile widziane, ale nie zawsze wymagane
+- Poinformuj managera i zaktualizuj Linear / kalendarz możliwie jak najwcześniej
 
-### Other Leave
-- Parental leave: according to local law + company top-up (details with People Ops)
-- Bereavement: 5 days paid
-- Jury duty / civic duties: fully supported
+### Inne rodzaje urlopów
+- Urlop rodzicielski: zgodnie z lokalnym prawem + dopłata firmowa (szczegóły w People Ops)
+- Urlop okolicznościowy po stracie bliskiej osoby: 5 płatnych dni
+- Obowiązki obywatelskie / ława przysięgłych: w pełni wspierane
 
-## How to Request Time Off
+## Jak złożyć wniosek urlopowy
 
-1. Check team calendar and Linear for critical deadlines
-2. Create a request in the HR system (or Linear ticket tagged `time-off`)
-3. Inform your manager and the relevant Slack channels
-4. Add the dates to the shared Engineering calendar
+1. Sprawdź kalendarz zespołu i Linear pod kątem krytycznych terminów
+2. Utwórz wniosek w systemie HR (lub ticket w Linear z tagiem `time-off`)
+3. Poinformuj managera i odpowiednie kanały na Slacku
+4. Dodaj daty do współdzielonego kalendarza Engineering
 
-Requests submitted with less than 2 weeks notice may be declined during peak periods (e.g. major releases).
+Wnioski złożone z wyprzedzeniem krótszym niż 2 tygodnie mogą zostać odrzucone w okresach wzmożonej pracy (np. duże release’y).
 
-## Remote Work
+## Praca zdalna
 
-### Default Arrangement
-- **Hybrid by default**: 2–3 days in the office recommended for most roles
-- Fully remote is possible with manager approval (especially for senior ICs and people outside commuting distance)
+### Domyślny model
+- **Model hybrydowy**: dla większości ról rekomendowane są 2–3 dni w biurze
+- Praca w pełni zdalna jest możliwa za zgodą managera (szczególnie dla senior IC i osób spoza zasięgu dojazdu)
 
-### Office Locations
-- Primary: Warsaw (Poland)
-- Secondary hubs: Berlin and remote-first for some AI team members
+### Lokalizacje biur
+- Główna: Warszawa (Polska)
+- Dodatkowe huby: Berlin oraz model remote-first dla części członków zespołu AI
 
-### Expectations When Working Remotely
-- Be available during core hours: **10:00 – 16:00** (CET/CEST) on working days
-- Keep Slack status updated
-- Prefer video for 1:1s and design discussions
-- Document decisions so async teammates can follow
+### Oczekiwania przy pracy zdalnej
+- Bądź dostępny(-a) w core hours: **10:00 – 16:00** (CET/CEST) w dni robocze
+- Aktualizuj status na Slacku
+- Preferuj wideo podczas spotkań 1:1 i dyskusji projektowych
+- Dokumentuj decyzje, aby osoby pracujące asynchronicznie mogły je śledzić
 
-### Equipment
-- Company laptop + monitor allowance
-- Home office stipend available once per year (see People Ops)
+### Sprzęt
+- Laptop firmowy + dodatek na monitor
+- Dodatek home office dostępny raz w roku (szczegóły: People Ops)
 
-## Core Hours & Meetings
+## Core hours i spotkania
 
-To protect focus time we try to keep most recurring meetings between 10:00 and 16:00 CET.  
-Deep work blocks (no meetings) are encouraged on Wednesdays.
+Aby chronić czas na pracę głęboką, większość cyklicznych spotkań planujemy między 10:00 a 16:00 CET.  
+W środy zachęcamy do bloków deep work (bez spotkań).
 
-## Questions
+## Pytania
 
-Contact People Ops (@tom) or your manager.
+Skontaktuj się z People Ops (@tom) albo swoim managerem.

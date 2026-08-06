@@ -1,8 +1,8 @@
-# Team Structure
+# Struktura zespołów
 
-As of July 2026
+Stan na lipiec 2026
 
-## Engineering Organization
+## Organizacja Engineering
 
 ```
 CTO
@@ -13,61 +13,61 @@ CTO
     └── Developer Experience & Infrastructure
 ```
 
-## Teams & Responsibilities
+## Zespoły i odpowiedzialności
 
 ### Platform Team
-- Core backend services
-- Authentication & authorization
-- Shared libraries and internal APIs
-- Database and data modeling
+- Kluczowe usługi backendowe
+- Uwierzytelnianie i autoryzacja
+- Biblioteki współdzielone i wewnętrzne API
+- Baza danych i modelowanie danych
 
 ### Product Frontend Team
-- Customer-facing Angular applications
+- Aplikacje Angular skierowane do klientów
 - Design system
-- Accessibility and performance of the UI
+- Dostępność i wydajność UI
 
 ### AI / Knowledge Team
-- RAG systems and Knowledge Bot
-- LLM integrations and evaluation
-- Internal AI tooling and experiments
-- Prompt engineering and safety
+- Systemy RAG i Knowledge Bot
+- Integracje LLM i ewaluacja
+- Wewnętrzne narzędzia AI i eksperymenty
+- Prompt engineering i bezpieczeństwo
 
 ### Developer Experience & Infrastructure
-- CI/CD pipelines
-- Local development experience
-- Observability and monitoring
-- Cloud infrastructure
+- Pipeline’y CI/CD
+- Doświadczenie lokalnego developmentu
+- Observability i monitoring
+- Infrastruktura chmurowa
 
-## Roles
+## Role
 
-| Role                  | Typical Scope                              |
-|-----------------------|--------------------------------------------|
-| Software Engineer     | Feature delivery within a team             |
-| Senior Software Engineer | Technical leadership on larger initiatives |
-| Tech Lead             | Architecture + mentoring + delivery ownership |
-| Engineering Manager   | People, process, hiring, career growth     |
-| Staff / Principal     | Cross-team technical direction             |
+| Rola                    | Typowy zakres                               |
+|-------------------------|---------------------------------------------|
+| Software Engineer       | Dostarczanie funkcji w obrębie zespołu      |
+| Senior Software Engineer| Techniczne prowadzenie większych inicjatyw  |
+| Tech Lead               | Architektura + mentoring + odpowiedzialność za delivery |
+| Engineering Manager     | Ludzie, proces, rekrutacja, rozwój kariery  |
+| Staff / Principal       | Kierunek techniczny między zespołami        |
 
-## Cross-Cutting Groups
+## Grupy przekrojowe
 
-- **Security Champions** – one person per team
-- **AI Guild** – open to anyone interested in AI topics (meets every two weeks)
-- **Frontend Guild** – Angular best practices, design system evolution
+- **Security Champions** – jedna osoba na zespół
+- **AI Guild** – otwarte dla osób zainteresowanych AI (spotkania co dwa tygodnie)
+- **Frontend Guild** – dobre praktyki Angular i rozwój design systemu
 
-## Decision Making
+## Podejmowanie decyzji
 
-- Team-level technical decisions: Tech Lead + team consensus
-- Cross-team or architectural decisions: RFCs + Architecture Review (async preferred)
-- Hiring and people decisions: Engineering Managers + leadership
+- Decyzje techniczne na poziomie zespołu: Tech Lead + konsensus zespołu
+- Decyzje międzyzespołowe lub architektoniczne: RFC + Architecture Review (preferowane asynchronicznie)
+- Decyzje kadrowe: Engineering Managerowie + leadership
 
-## On-Call
+## On-call
 
-- Currently only Platform and AI services have formal on-call rotations
-- Frontend and DX teams participate in incident response when needed
-- On-call compensation and rotation rules are documented in People Ops
+- Obecnie formalne rotacje on-call mają tylko usługi Platform i AI
+- Zespoły Frontend i DX wspierają obsługę incydentów, gdy jest taka potrzeba
+- Zasady wynagradzania i rotacji on-call są opisane w People Ops
 
-## How to Find the Right Person
+## Jak znaleźć właściwą osobę
 
-- Check the team roster in Linear or Notion
-- Ask in `#engineering` – someone will point you in the right direction
-- For people-related topics → your Engineering Manager or People Ops
+- Sprawdź roster zespołów w Linear lub Notion
+- Zapytaj na `#engineering` — ktoś wskaże właściwy kierunek
+- W tematach people-related → Twój Engineering Manager albo People Ops

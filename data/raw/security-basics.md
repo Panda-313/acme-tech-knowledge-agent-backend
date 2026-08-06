@@ -1,48 +1,48 @@
-# Security Basics for Everyone
+# Podstawy bezpieczeństwa dla wszystkich
 
-Last reviewed: May 2026
+Ostatni przegląd: maj 2026
 
-## Passwords & Authentication
+## Hasła i uwierzytelnianie
 
-- Use **1Password** for all work accounts. Do not reuse passwords.
-- Enable hardware security keys (YubiKey) or passkeys wherever available.
-- Never share your password or 2FA codes – not even with IT.
-- Company SSO is the preferred way to log in to internal tools.
+- Używaj **1Password** do wszystkich kont służbowych. Nie używaj tych samych haseł ponownie.
+- Włącz sprzętowe klucze bezpieczeństwa (YubiKey) lub passkeys tam, gdzie to dostępne.
+- Nigdy nie udostępniaj hasła ani kodów 2FA — nawet działowi IT.
+- Firmowe SSO to preferowany sposób logowania do narzędzi wewnętrznych.
 
-## Secrets Management
+## Zarządzanie sekretami
 
-- **Never** commit secrets to Git (API keys, tokens, passwords, certificates).
-- Use environment variables or the company secrets manager.
-- If you accidentally commit a secret:
-  1. Rotate it immediately
-  2. Notify `#security`
-  3. Remove it from history if possible (git filter-repo / BFG)
+- **Nigdy** nie commituj sekretów do Gita (API key, tokeny, hasła, certyfikaty).
+- Używaj zmiennych środowiskowych lub firmowego menedżera sekretów.
+- Jeśli przypadkowo zacommitujesz sekret:
+  1. Natychmiast go zrotuj
+  2. Powiadom `#security`
+  3. Usuń go z historii, jeśli to możliwe (git filter-repo / BFG)
 
-## Code & Data Handling
+## Obsługa kodu i danych
 
-- Do not download production customer data to your laptop unless explicitly approved.
-- When working with real data, prefer anonymized or synthetic datasets.
-- Production database access is read-only by default and requires justification.
+- Nie pobieraj produkcyjnych danych klientów na laptopa bez wyraźnej zgody.
+- Przy pracy na realnych danych preferuj zbiory zanonimizowane lub syntetyczne.
+- Dostęp do produkcyjnej bazy domyślnie jest tylko do odczytu i wymaga uzasadnienia.
 
-## Dependencies
+## Zależności
 
-- Run `npm audit` / `pip-audit` regularly.
-- Prefer well-maintained libraries with recent releases.
-- New dependencies that handle authentication, cryptography, or network traffic need extra review.
+- Uruchamiaj regularnie `npm audit` / `pip-audit`.
+- Preferuj biblioteki dobrze utrzymywane i regularnie aktualizowane.
+- Nowe zależności obsługujące auth, kryptografię lub ruch sieciowy wymagają dodatkowego przeglądu.
 
-## AI Tools (reminder)
+## Narzędzia AI (przypomnienie)
 
-- Never paste production secrets, customer PII, or internal credentials into public AI models.
-- Prefer local models or company-provisioned endpoints for sensitive work.
+- Nigdy nie wklejaj sekretów produkcyjnych, PII klientów ani wewnętrznych danych uwierzytelniających do publicznych modeli AI.
+- Do wrażliwej pracy preferuj modele lokalne lub firmowe endpointy.
 
-## Reporting Security Issues
+## Zgłaszanie problemów bezpieczeństwa
 
-- Suspected vulnerability or incident → post in `#security` or email security@acmetech.example
-- We follow a blameless culture. Reporting early is always rewarded.
+- Podejrzenie podatności lub incydentu → napisz na `#security` albo wyślij email na security@acmetech.example
+- Pracujemy w kulturze blameless. Wczesne zgłoszenia są zawsze mile widziane.
 
-## Useful Links
+## Przydatne linki
 
-- Internal security checklist (Drive)
-- Security Champions program (ask in `#security`)
+- Wewnętrzna checklista bezpieczeństwa (Drive)
+- Program Security Champions (zapytaj na `#security`)
 
-When in doubt, ask. It is always better to check than to assume.
+Gdy masz wątpliwości — zapytaj. Lepiej sprawdzić niż zakładać.
