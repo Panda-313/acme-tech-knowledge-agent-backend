@@ -1,75 +1,24 @@
-import json
-import os
 import sys
 import time
-from pathlib import Path
 from typing import Any
 
 import httpx
 from openai import RateLimitError
 from langgraph.checkpoint.memory import InMemorySaver
-from pydantic import BaseModel
 
 from src.api.types import Answer
 from src.feature_engineering import ask_question_agent, load_vectorstore
-from src.feature_engineering.config import CHROMA_COLLECTION_NAME, CHROMA_DB_PATH
+from src.feature_engineering.config import CHROMA_COLLECTION_NAME, CHROMA_DB_PATH, DATASET_PATH, RESULTS_PATH, \
+    RATE_LIMIT_RETRIES, LLM_TIMEOUT_SECONDS, RATE_LIMIT_BASE_BACKOFF_SECONDS, INTER_QUESTION_DELAY_SECONDS
+from src.feature_engineering.evals import read_jsonl, write_jsonl, print_summary
 from src.feature_engineering.evals.llm_judge import llm_judge
+from src.feature_engineering.models import EvalQuestion, EvalResult
 from src.refusal_detection import detect_refusal
 from src.feature_engineering.scripts.rag_demo import MOCKED_USERS
 
-DATASET_PATH = Path(__file__).resolve().parent.parent / "evals" / "eval_dataset.jsonl"
-RESULTS_PATH = Path(__file__).resolve().parent.parent / "evals" / "eval_results.jsonl"
-RATE_LIMIT_RETRIES = int(os.getenv("EVAL_RATE_LIMIT_RETRIES", "3"))
-RATE_LIMIT_BASE_BACKOFF_SECONDS = float(os.getenv("EVAL_RATE_LIMIT_BASE_BACKOFF_SECONDS", "15"))
-INTER_QUESTION_DELAY_SECONDS = float(os.getenv("EVAL_INTER_QUESTION_DELAY_SECONDS", "0.5"))
-LLM_TIMEOUT_SECONDS = float(os.getenv("EVAL_LLM_TIMEOUT_SECONDS", "45"))
 
-
-class EvalQuestion(BaseModel):
-    id: str
-    category: str
-    question: str
-    expected_tools: list[str]
-    expected_answer_contains: list[str]
-    should_refuse: bool
-    notes: str
-
-
-class EvalResult(BaseModel):
-    id: str
-    question: str
-    expected_tools: list[str]
-    actual_tools: list[str]
-    expected_answer_contains: list[str]
-    final_answer: str
-    should_refuse: bool
-    did_refuse: bool
-    latency_seconds: float
-    sources: list[str]
-    status: str
-    passed: bool
-    llm_judge_passed: bool | None = None
-    error: str | None = None
-
-
-def validate_questions(questions: list[dict[str, Any]]) -> list[EvalQuestion]:
+def create_validation_questions_list(questions: list[dict[str, Any]]) -> list[EvalQuestion]:
     return [EvalQuestion(**question) for question in questions]
-
-
-def read_jsonl(path: Path) -> list[dict[str, Any]]:
-    json_list: list[dict[str, Any]] = []
-    with path.open("r", encoding="utf-8") as jsonl_file:
-        for line in jsonl_file:
-            if line.strip():
-                json_list.append(json.loads(line))
-    return json_list
-
-
-def write_jsonl(path: Path, records: list[EvalResult]) -> None:
-    with path.open("w", encoding="utf-8") as output:
-        for record in records:
-            output.write(record.model_dump_json(ensure_ascii=False) + "\n")
-
 
 def has_expected_answer_content(final_answer: str, expected: list[str]) -> bool:
     lowered_answer = final_answer.lower()
@@ -101,8 +50,6 @@ def run_single_question(
                 llm_timeout_seconds=LLM_TIMEOUT_SECONDS,
             )
             break
-        except KeyboardInterrupt:
-            raise
         except (RateLimitError, httpx.HTTPStatusError) as exc:
             is_429 = isinstance(exc, RateLimitError) or (
                 isinstance(exc, httpx.HTTPStatusError) and exc.response.status_code == 429
@@ -178,18 +125,6 @@ def run_single_question(
 
     passed = tools_match and refusal_match and (answer_match or judge_passed)
 
-    print("*" * 60)
-    print(f"{question.id}: {question.question}")
-    print(f"latency = {latency}")
-    print(f"actual_tools = {actual_tools}")
-    print(f"final_answer = {final_answer}")
-    print(f"did_refuse = {did_refuse}")
-    print(f"tools_match = {tools_match}")
-    print(f"answer_match = {answer_match}")
-    print(f"refusal_match = {refusal_match}")
-    print(f"passed = {passed}")
-    print(f"llm_judge_passed = {judge_passed}")
-    print("*" * 60)
     return EvalResult(
         id=question.id,
         question=question.question,
@@ -225,24 +160,8 @@ def run_eval_dataset(questions: list[EvalQuestion]) -> list[EvalResult]:
     return results
 
 
-def print_summary(results: list[EvalResult]) -> None:
-    total = len(results)
-    passed = sum(1 for result in results if result.passed)
-    judge_passed = sum(1 for result in results if result.llm_judge_passed is True)
-    errors = sum(1 for result in results if result.status == "error")
-    successful_latencies = [result.latency_seconds for result in results if result.status == "success"]
-    average_latency = sum(successful_latencies) / len(successful_latencies) if successful_latencies else 0.0
-
-    print("\n=== Eval summary ===")
-    print(f"Total: {total}")
-    print(f"Passed (keyword): {passed}")
-    print(f"Passed (llm_judge): {judge_passed}")
-    print(f"Errors: {errors}")
-    print(f"Average latency (success only): {average_latency:.2f}s")
-
-
 def main() -> int:
-    questions = validate_questions(read_jsonl(DATASET_PATH))
+    questions = create_validation_questions_list(read_jsonl(DATASET_PATH))
     try:
         results = run_eval_dataset(questions)
         write_jsonl(RESULTS_PATH, results)

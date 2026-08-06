@@ -1,5 +1,3 @@
-"""Utilities for detecting refusal-like answers in eval outputs."""
-
 import re
 
 _REFUSAL_PATTERNS = (
@@ -10,7 +8,6 @@ _REFUSAL_PATTERNS = (
     re.compile(r"\bnie\s+dotyczy\b"),
     re.compile(r"nie\s+mog(?:ę|e)\s+pomóc\s+w\s+tym\s+temacie"),
 )
-
 
 def detect_refusal(final_answer: str, actual_tools: list[str]) -> bool:
     lowered_answer = final_answer.lower()

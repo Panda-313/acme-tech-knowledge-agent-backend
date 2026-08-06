@@ -16,10 +16,17 @@ load_dotenv(PROJECT_ROOT / ".env")
 # Environment variables
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
 
+RATE_LIMIT_RETRIES = 4
+RATE_LIMIT_BASE_BACKOFF_SECONDS = 15
+INTER_QUESTION_DELAY_SECONDS = 0.5
+LLM_TIMEOUT_SECONDS = 45
+
 # Paths
 DATA_RAW_PATH = PROJECT_ROOT / "data" / "raw"
 CHROMA_DB_PATH = PROJECT_ROOT / "chromadb"
 CHROMA_COLLECTION_NAME = "company_docs"
+DATASET_PATH = Path(__file__).parent / "evals" / "eval_dataset.jsonl"
+RESULTS_PATH = Path(__file__).parent / "evals" / "eval_results.jsonl"
 
 # Embedding model
 EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
