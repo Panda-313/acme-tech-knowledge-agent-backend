@@ -17,6 +17,12 @@ from ...api.types import Answer
 
 
 def _ensure_api_key() -> str:
+    print("LANGSMITH_TRACING =", os.getenv("LANGSMITH_TRACING"))
+    print("LANGSMITH_API_KEY =", "SET" if os.getenv("LANGSMITH_API_KEY") else "MISSING")
+    print("LANGSMITH_ENDPOINT =", os.getenv("LANGSMITH_ENDPOINT"))
+    print("LANGSMITH_PROJECT =", os.getenv("LANGSMITH_PROJECT"))
+
+
     api_key = os.getenv("OPENAI_API_KEY", "").strip()
     if not api_key:
         api_key = getpass.getpass("Enter your OpenAI API key: ")
@@ -36,6 +42,8 @@ def ask_question_agent(
     thread_id: int = 1,
     llm_max_retries: int = 2,
     llm_timeout_seconds: float = 60.0,
+    tags: list[str] | None = None,
+    metadata: dict[str, Any] | None = None,
 ) -> Answer:
     logger = logger or logging.getLogger(__name__)
     used_sources: list[str] = []
@@ -54,6 +62,10 @@ def ask_question_agent(
         timeout=llm_timeout_seconds,
     )
     thread_config = {"configurable": {"thread_id": thread_id}}
+    if tags:
+        thread_config["tags"] = tags
+    if metadata:
+        thread_config["metadata"] = metadata
 
     agent = create_agent(
         model=llm,

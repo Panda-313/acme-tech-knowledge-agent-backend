@@ -34,8 +34,8 @@ MOCKED_USERS: list[MockedUser] = [
 ]
 
 DEMO_QUESTIONS = [
-    # "Nazywam sie Miki",
-    # "Jak sie nazywam?",
+    "Nazywam sie Miki, szukam informacji na temat firmy acme tech",
+    "Przypomnij mi prosze jak sie nazywam. Oraz informacje na temat urlopow",
     # "Ile dni urlopowych zostalo mi w 2026 roku?",
     # "Ile dni urlopowych zostalo mi w 2023 roku?",
     # "Ile urlopu jeszcze mam w tym roku?"
@@ -78,11 +78,18 @@ def main() -> int:
 
     try:
         checkpointer = InMemorySaver()
-        for question in DEMO_QUESTIONS:
+        for idx, question  in enumerate(DEMO_QUESTIONS, start = 1):
             print(f"\nPytanie: {question}")
             print("-" * 60)
 
-            response = ask_question_agent(question, vectorstore, MOCKED_USERS[0], checkpointer)
+            response = ask_question_agent(
+                question,
+                vectorstore,
+                MOCKED_USERS[0],
+                checkpointer,
+                tags=["rag_demo"],
+                metadata={"question_id": idx, "thread_id": idx},
+            )
             answer_preview = response.answer
             print(f"Odpowiedź: {answer_preview}")
 

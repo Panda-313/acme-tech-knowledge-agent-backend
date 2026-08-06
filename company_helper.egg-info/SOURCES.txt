@@ -7,6 +7,7 @@ company_helper.egg-info/entry_points.txt
 company_helper.egg-info/requires.txt
 company_helper.egg-info/top_level.txt
 src/__init__.py
+src/refusal_detection.py
 src/api/__init__.py
 src/api/api.py
 src/api/cli.py
@@ -14,6 +15,9 @@ src/api/types.py
 src/feature_engineering/__init__.py
 src/feature_engineering/config.py
 src/feature_engineering/models.py
+src/feature_engineering/evals/__init__.py
+src/feature_engineering/evals/llm_judge.py
+src/feature_engineering/evals/utils.py
 src/feature_engineering/rag/__init__.py
 src/feature_engineering/rag/agent.py
 src/feature_engineering/rag/ingestion.py
@@ -27,3 +31,4 @@ src/feature_engineering/scripts/__init__.py
 src/feature_engineering/scripts/eval.py
 src/feature_engineering/scripts/ingest.py
 src/feature_engineering/scripts/rag_demo.py
+tests/test_refusal_detection.py

@@ -48,6 +48,8 @@ def run_single_question(
                 thread_id=thread_id,
                 llm_max_retries=0,
                 llm_timeout_seconds=LLM_TIMEOUT_SECONDS,
+                tags=["eval"],
+                metadata={"question_id": question.id, "thread_id": thread_id},
             )
             break
         except (RateLimitError, httpx.HTTPStatusError) as exc:
