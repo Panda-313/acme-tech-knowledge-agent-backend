@@ -35,6 +35,9 @@ class EvalResult(BaseModel):
     sources: list[str]
     status: str
     passed: bool
+    tools_match: bool
+    refusal_match: bool
+    answer_match: bool
     llm_judge_passed: bool | None = None
     error: str | None = None
 

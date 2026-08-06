@@ -65,6 +65,9 @@ def run_single_question(
                     actual_tools=[],
                     expected_answer_contains=question.expected_answer_contains,
                     final_answer="",
+                    tools_match=False,
+                    refusal_match=False,
+                    answer_match=False,
                     should_refuse=question.should_refuse,
                     did_refuse=False,
                     latency_seconds=latency,
@@ -102,6 +105,9 @@ def run_single_question(
             question=question.question,
             expected_tools=question.expected_tools,
             actual_tools=[],
+            tools_match=False,
+            refusal_match=False,
+            answer_match= False,
             expected_answer_contains=question.expected_answer_contains,
             final_answer="",
             should_refuse=question.should_refuse,
@@ -132,6 +138,9 @@ def run_single_question(
         actual_tools=actual_tools,
         expected_answer_contains=question.expected_answer_contains,
         final_answer=final_answer,
+        tools_match=tools_match,
+        refusal_match=refusal_match,
+        answer_match=answer_match,
         should_refuse=question.should_refuse,
         did_refuse=did_refuse,
         latency_seconds=latency,
@@ -163,7 +172,7 @@ def run_eval_dataset(questions: list[EvalQuestion]) -> list[EvalResult]:
 def main() -> int:
     questions = create_validation_questions_list(read_jsonl(DATASET_PATH))
     try:
-        results = run_eval_dataset(questions)
+        results: list[EvalResult] = run_eval_dataset(questions)
         write_jsonl(RESULTS_PATH, results)
         print_summary(results)
         print(f"Saved results to: {RESULTS_PATH}")

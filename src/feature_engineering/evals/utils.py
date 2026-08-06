@@ -33,3 +33,13 @@ def print_summary(results: list[EvalResult]) -> None:
     print(f"Passed (llm_judge): {judge_passed}")
     print(f"Errors: {errors}")
     print(f"Average latency (success only): {average_latency:.2f}s")
+
+    num_of_errors = sum(1 for result in results if result.error)
+    num_of_results_with_no_errors = len(results) - num_of_errors
+    tool_selection_accuracy = sum(1 for result in results if result.tools_match) / num_of_results_with_no_errors
+    refusal_accuracy = sum(1 for result in results if result.refusal_match) / num_of_results_with_no_errors
+    answer_match = sum(1 for result in results if (result.answer_match or result.llm_judge_passed)) / num_of_results_with_no_errors
+
+    print(f"Tool selection accuracy: {tool_selection_accuracy:.2f}%")
+    print(f"Refusal accuracy: {refusal_accuracy:.2f}%")
+    print(f"Answer match: {answer_match:.2f}%")
